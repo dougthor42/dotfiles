@@ -1,0 +1,8 @@
+[user]
+	name = Douglas Thor
+	email = doug.thor@gmail.com
+[core]
+	autocrlf = true
+	editor = vim
+[push]
+	default = simple
