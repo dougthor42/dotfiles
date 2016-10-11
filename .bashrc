@@ -103,6 +103,10 @@ xterm*|rxvt*)
 esac
 
 # Aliases
+# allow sudo to use aliases
+# See http://askubuntu.com/a/22043
+alias sudo='sudo '
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
