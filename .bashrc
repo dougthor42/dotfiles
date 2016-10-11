@@ -33,6 +33,11 @@ C_RESET='\[\033[0m\]'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Use Pygments so that less is colored.
+# See http://superuser.com/a/337640
+export LESS=' -R '
+export LESSOPEN='| ~/.lessfilter %s'
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
