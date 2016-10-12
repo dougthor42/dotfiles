@@ -120,12 +120,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Even more aliases (or functions that act as aliases...)
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
-alias dir='ls -lhA --group-directories-first'
-#alias lm='ls -lhA --group-directories-first --color=auto | less'
-lsp(){ ls -lAh --group-directories-first --color=always "$@" | less -R; }
+alias dir='ls -AlFh --group-directories-first'
+lsp(){ ls -AlFh --group-directories-first --color=always "$@" | less -R; }
 alias df='df -H'
 alias du='du -ch'
 alias cd..='cd ..'   # because I sometimes type too fast...
