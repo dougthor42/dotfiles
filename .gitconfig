@@ -2,7 +2,8 @@
 	name = Douglas Thor
 	email = doug.thor@gmail.com
 [core]
-	autocrlf = true
+	eof=lf
+	autocrlf = false
 	editor = vim
 [push]
 	default = simple
