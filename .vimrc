@@ -11,6 +11,8 @@ runtime! debian.vim
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
+set encoding=utf-8
+
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 if has("syntax")
@@ -33,17 +35,15 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
+" General Config (aka: I can't think of a name to group these...)
+" ==============
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
+set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 set number              " Enable line numbers
+set history=100		" Buffer history size
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -52,4 +52,37 @@ endif
 
 " Colors and highlighting
 colors desert
+
+" Indenting
+" =========
+set nowrap
+"set tabstop=4
+"set expandtab
+set smartindent
+set autoindent
+
+" Search Settings
+" ===============
+set hlsearch
+set incsearch		" Incremental search
+"set ignorecase		" Do case insensitive matching
+"set smartcase		" Do smart case matching
+
+" Commands
+" ========
+let mapleader="\\"
+" Map '\rr' to reload the .vimrc file.
+map <leader>rr :source ~/.vimrc<CR>
+
+" Folding
+" =======
+"set foldmethod=indent		" Fold based on indent
+"set foldnestmax=3		" Deepest fold is 3 levels
+"set nofoldenable		" Don't fold by default
+
+" Completion
+" ==========
+
+" Scrolling
+" =========
 
