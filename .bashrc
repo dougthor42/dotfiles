@@ -33,6 +33,10 @@ C_RESET='\[\033[0m\]'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+if [ "$TERM" == "xterm" ]; then
+	export TERM=xterm-256color
+fi
+
 # Use Pygments so that less is colored.
 # See http://superuser.com/a/337640
 export LESS=' -R '
