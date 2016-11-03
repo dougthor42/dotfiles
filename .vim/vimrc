@@ -71,8 +71,8 @@ set autoindent
 " ===============
 set hlsearch
 set incsearch		" Incremental search
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
+set ignorecase		" Do case insensitive matching
+set smartcase		" ...unless an uppercase is typed
 
 " Commands
 " ========
@@ -91,6 +91,8 @@ map <leader>rr :source ~/.vimrc<CR>
 
 " Scrolling
 " =========
+set scrolloff=8          " Start scrolling when 8 lines away from margins
+set sidescrolloff=15     " or 15 columns away from the edge.
 
 
 " ===========================================================================
