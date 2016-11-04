@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# Always print and use physical directories.
+set -P
+
 # Constants
 ## Colors
 C_GREY='\[\033[0;30m\]'
@@ -180,10 +183,11 @@ fi
 
 # set a PS1 prompt with the time, user, host, location, and branch
 git_branch() { git branch 2> /dev/null | grep '^*' | colrm 1 2; }
+OLD_PWD=$C_WHITEBRIGHT"Previous Dir: \$OLDPWD\n"
 TIME=$C_REDBRIGHT'\t '
 HOST=$C_GREENBRIGHT$USER'@\h'
 LOCATION=$C_YELLOWBRIGHT' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
 BRANCH="$C_CYANBRIGHT$(__git_ps1)"
 EOI="$C_RESET\n\$ "
-PS1="$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$EOI"
+PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$EOI"
 
