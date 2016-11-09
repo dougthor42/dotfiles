@@ -10,10 +10,9 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+" This is actually not needed: http://stackoverflow.com/a/5845583/1354930
+" and will actually override `vim -C`
+set nocompatible
 
 set encoding=utf-8
 
@@ -78,7 +77,7 @@ set smartcase		" ...unless an uppercase is typed
 " ========
 let mapleader="\\"
 " Map '\rr' to reload the .vimrc file.
-map <leader>rr :source ~/.vimrc<CR>
+map <leader>rr :source ~/.vim/vimrc<CR>
 
 " Folding
 " =======
@@ -104,8 +103,9 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
-" Plug 'valloric/youcompleteme'
+Plug 'valloric/youcompleteme'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
@@ -137,7 +137,21 @@ set background=dark
 
 " YouCompleteMe
 " =============
+" Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
+nmap <leader>jd :YcmCompleter GoTo<CR>
+nmap <F12> :YcmCompleter GoTo<CR>
 
 " NERD Tree
 " =========
+
+" Syntastic
+" =========
+set statusline+=%#warnings#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
