@@ -1,3 +1,13 @@
+###########################################################
+#                                                         #
+# Doug's .bashrc file                                     #
+#                                                         #
+###########################################################
+
+# Modified from the default for debian/ubuntu using
+# a variety of sources (some of which I didn't cite,
+# sorry!)
+
 # ~/.bashrc: executd by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -12,7 +22,9 @@ esac
 set -P
 
 # Constants
+# =========================================================
 ## Colors
+## ======
 C_GREY='\[\033[0;30m\]'
 C_GREYBRIGHT='\[\033[1;30m\]'
 C_RED='\[\033[0;31m\]'
@@ -125,6 +137,7 @@ xterm*|rxvt*)
 esac
 
 # Aliases
+# =========================================================
 # allow sudo to use aliases
 # See http://askubuntu.com/a/22043
 alias sudo='sudo '
@@ -150,6 +163,7 @@ lsp(){ ls -AlFh --group-directories-first --color=always "$@" | less -R; }
 alias df='df -H'
 alias du='du -ch'
 alias cd..='cd ..'   # because I sometimes type too fast...
+alias cd!='cd $OLDPWD'      # allows fast switching to previous directory
 alias free='free -ht'
 alias mkdir='mkdir -pv'
 

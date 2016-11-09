@@ -7,12 +7,13 @@ echo "Making symlinks for dotfiles..."
 # TODO: Refactor to not be brute-force...
 pwd
 cd ~
-ln -s dotfiles/.bashrc .bashrc
-ln -s dotfiles/.bash_logout .bash_logout
-ln -s dotfiles/.gitconfig .gitconfig
-ln -s dotfiles/.lessfilter .lessfilter
-ln -s dotfiles/.profile .profile
-ln -s dotfiles/.vim/ .vim
+ln -s "/home/$USER/dotfiles/.bashrc" "/home/$USER/.bashrc"
+ln -s "/home/$USER/dotfiles/.bash_logout" "/home/$USER/.bash_logout"
+ln -s "/home/$USER/dotfiles/.gitconfig" "/home/$USER/.gitconfig"
+ln -s "/home/$USER/dotfiles/.lessfilter" "/home/$USER/.lessfilter"
+ln -s "/home/$USER/dotfiles/.profile" "/home/$USER/.profile"
+ln -s "/home/$USER/dotfiles/.vim" "/home/$USER/.vim"
+ln -s "/home/$USER/dotfiles/.toprc" "/home/$USER/.toprc"
 
 echo "Complete."
 
