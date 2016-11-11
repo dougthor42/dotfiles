@@ -105,6 +105,7 @@ Plug 'valloric/youcompleteme'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 
@@ -162,9 +163,30 @@ let g:table_mode_header_fillchar="="
 " =========
 let g:lightline = {
 	\ 'colorscheme': 'wombat',
+	\ 'active': {
+	\   'left': [ [ 'mode' ],
+	\	      [ 'fugitive', 'filename', 'modified' ] ]
+	\ },
 	\ 'separator': { 'left': '|', 'right': '|' },
-	\ 'subseparator': { 'left': "|", 'right': "|" }
+	\ 'subseparator': { 'left': "|", 'right': "|" },
+	\ 'component_function': {
+	\   	'modified': 'LightlineModified',
+	\ },
+	\ 'component_expand': {
+	\   'fugitive': 'LightlineFugitive',
+	\ },
+	\ 'component_type': {
+	\   'fugitive': 'warning',
+	\ },
 	\ }
+
+function! LightlineFugitive()
+  return exists("*fugitive#head") ? fugitive#head() : ''
+endfunction
+
+function! LightlineModified()
+  return &modified ? "+" : ''
+endfunction
 
 
 " ===========================================================================
