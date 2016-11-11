@@ -24,13 +24,6 @@ if has("syntax")
   syntax on
 endif
 
-" Default color scheme
-" ====================
-" Use a built-in color schem so that things look nice even if the plugins
-" can't load.
-set background=dark
-colorscheme desert
-
 " Set lots of colors :-)
 set t_Co=256
 
@@ -54,6 +47,7 @@ set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
 set number              " Enable line numbers
 set history=100		" Buffer history size
+set laststatus=2	" Always display the status line.
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -163,4 +157,24 @@ let g:syntastic_check_on_wq = 0
 " Use ReST-compatible tables
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
+
+" LightLine
+" =========
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'separator': { 'left': '|', 'right': '|' },
+	\ 'subseparator': { 'left': "|", 'right': "|" }
+	\ }
+
+
+" ===========================================================================
+" End Plugins 
+" ===========================================================================
+
+" Default color scheme
+" ====================
+" Use a built-in color schem so that things look nice even if the plugins
+" can't load.
+set background=dark
+colorscheme desert
 
