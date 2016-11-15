@@ -16,6 +16,12 @@ runtime! debian.vim
 " and will actually override `vim -C`
 set nocompatible
 
+" Source a global configuration file if available
+" Do this early on so that it doesn't override any of my settings
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
 set encoding=utf-8
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
@@ -51,11 +57,6 @@ set laststatus=2	" Always display the status line.
 " Show whitespace as characters.
 set listchars=tab:>-,trail:~,extends:>,precedes:<
 set list
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
 
 " Indenting
 " =========
