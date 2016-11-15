@@ -58,6 +58,15 @@ set laststatus=2	" Always display the status line.
 set listchars=tab:>-,trail:~,extends:>,precedes:<
 set list
 
+" Remove all trailing whitespace on save.
+function! <SID>StripTrailingWhitespace()
+	let _save_pos = getpos(".")
+	%s/\s\+$//e
+	call setpos(".", _save_pos)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+map <leader>w :call <SID>StripTrailingWhitespace()<CR>
+
 " Indenting
 " =========
 " Defaults
@@ -108,7 +117,7 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 
 
 " ===========================================================================
-" Plugins 
+" Plugins
 " ===========================================================================
 
 " Insallation via vim-plug
@@ -133,10 +142,10 @@ call plug#end()
 " NERD Commenter
 " ==============
 " Add spaces after comment delims
-let g:NERDSpaceDelims = 1    
+let g:NERDSpaceDelims = 1
 
 " Align comments left instead of following code indentation
-let g:NERDDefaultAlign = 1   
+let g:NERDDefaultAlign = 1
 
 " Comment and invert empty lines
 let g:NERDCommentEmptyLines = 1
@@ -207,7 +216,7 @@ endfunction
 
 
 " ===========================================================================
-" End Plugins 
+" End Plugins
 " ===========================================================================
 
 " Default color scheme
