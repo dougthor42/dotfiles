@@ -48,6 +48,9 @@ set hidden		" Hide buffers when they are abandoned
 set number              " Enable line numbers
 set history=100		" Buffer history size
 set laststatus=2	" Always display the status line.
+" Show whitespace as characters.
+set listchars=tab:>-,trail:~,extends:>,precedes:<
+set list
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -56,11 +59,23 @@ endif
 
 " Indenting
 " =========
+" Defaults
 set nowrap
-"set tabstop=4
-"set expandtab
 set smartindent
 set autoindent
+set tabstop=8
+
+" Python Files
+autocmd BufNewFile,BufRead *.py
+	\ set expandtab |
+	\ set shiftwidth=4 |
+	\ set softtabstop=4
+
+" Javascript, HTML, and CSS
+autocmd BufNewFile,BufRead *.js, *.html, *.css
+	\ set tabstop=2 |
+	\ set softtabstop=2 |
+	\ set shiftwidth=2
 
 " Search Settings
 " ===============
@@ -77,8 +92,9 @@ map <leader>rr :source ~/.vim/vimrc<CR>
 
 " Folding
 " =======
-"set foldmethod=indent		" Fold based on indent
-"set foldnestmax=3		" Deepest fold is 3 levels
+set foldmethod=indent		" Fold based on indent
+set foldnestmax=3		" Deepest fold is 3 levels
+set foldlevel=5
 "set nofoldenable		" Don't fold by default
 
 " Completion
