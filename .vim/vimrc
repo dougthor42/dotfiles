@@ -54,7 +54,9 @@ set number              " Enable line numbers
 set history=100		" Buffer history size
 set laststatus=2	" Always display the status line.
 " Show whitespace as characters.
-set listchars=tab:>-,trail:~,extends:>,precedes:<
+set listchars=tab:→\ ,extends:▸,precedes:◂,eol:¬
+" Use this line below if unicode isn't displaying correctly.
+" set listchars=tab:>\ ,extends:>,precedes:<
 set list
 
 " Remove all trailing whitespace on save.
