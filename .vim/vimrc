@@ -33,8 +33,7 @@ endif
 " Set lots of colors :-)
 set t_Co=256
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Jump to the last position when reopening a file.
 "if has("autocmd")
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
@@ -45,7 +44,7 @@ if has("autocmd")
 endif
 
 " General Config (aka: I can't think of a name to group these...)
-" ==============
+" ===========================================================================
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
 "set autowrite		" Automatically save before commands like :next and :make
@@ -68,7 +67,7 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 map <leader>w :call <SID>StripTrailingWhitespace()<CR>
 
 " Indenting
-" =========
+" ===========================================================================
 " Defaults
 set nowrap
 set smartindent
@@ -88,30 +87,30 @@ autocmd BufNewFile,BufRead *.js, *.html, *.css
 	\ set shiftwidth=2
 
 " Search Settings
-" ===============
+" ===========================================================================
 set hlsearch
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" ...unless an uppercase is typed
 
 " Commands
-" ========
+" ===========================================================================
 let mapleader="\\"
 " Map '\rr' to reload the .vimrc file.
 map <leader>rr :source ~/.vim/vimrc<CR>
 
 " Folding
-" =======
+" ===========================================================================
 set foldmethod=indent		" Fold based on indent
 set foldnestmax=3		" Deepest fold is 3 levels
 set foldlevel=5
 "set nofoldenable		" Don't fold by default
 
 " Completion
-" ==========
+" ===========================================================================
 
 " Scrolling
-" =========
+" ===========================================================================
 set scrolloff=8          " Start scrolling when 8 lines away from margins
 set sidescrolloff=15     " or 15 columns away from the edge.
 
@@ -121,7 +120,7 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 " ===========================================================================
 
 " Insallation via vim-plug
-" ========================
+" ===========================================================================
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -140,7 +139,7 @@ call plug#end()
 " ===========================================================================
 
 " NERD Commenter
-" ==============
+" ===========================================================================
 " Add spaces after comment delims
 let g:NERDSpaceDelims = 1
 
@@ -154,22 +153,22 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " Solarized
-" =========
+" ===========================================================================
 let g:solarized_termcolors = 256
 set background=dark
 " colorscheme solarized
 
 " YouCompleteMe
-" =============
+" ===========================================================================
 " Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
 nmap <leader>jd :YcmCompleter GoTo<CR>
 nmap <F12> :YcmCompleter GoTo<CR>
 
 " NERD Tree
-" =========
+" ===========================================================================
 
 " Syntastic
-" =========
+" ===========================================================================
 set statusline+=%#warnings#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -180,13 +179,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Table Mode
-" ==========
+" ===========================================================================
 " Use ReST-compatible tables
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
 
 " LightLine
-" =========
+" ===========================================================================
 let g:lightline = {
 	\ 'colorscheme': 'wombat',
 	\ 'active': {
@@ -220,7 +219,7 @@ endfunction
 " ===========================================================================
 
 " Default color scheme
-" ====================
+" ===========================================================================
 " Use a built-in color schem so that things look nice even if the plugins
 " can't load.
 set background=dark
