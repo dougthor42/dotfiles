@@ -171,6 +171,9 @@ alias mkdir='mkdir -pv'
 alias python=python3
 alias python2=python2
 
+# Git aliases
+alias glt='git log `git describe --tags --abbrev=0`..HEAD --oneline --decorate --source'
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
