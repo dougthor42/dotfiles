@@ -1,3 +1,9 @@
+#
+# General gitconfig
+#
+# '#' or ';' is a line comment.
+#
+
 [user]
 	name = Douglas Thor
 	email = doug.thor@gmail.com
@@ -5,5 +11,6 @@
 	eof=lf
 	autocrlf = false
 	editor = vim
+	filemode = false		# Ignore file modes (chmod)
 [push]
 	default = simple
