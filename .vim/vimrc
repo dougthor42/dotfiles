@@ -168,6 +168,8 @@ nmap <F12> :YcmCompleter GoTo<CR>
 
 " NERD Tree
 " ===========================================================================
+" Start NERDTree when VIM opens
+autocmd vimenter * NERDTree
 
 " Syntastic
 " ===========================================================================
