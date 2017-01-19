@@ -168,8 +168,9 @@ set background=dark
 " Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
 nmap <leader>jd :YcmCompleter GoTo<CR>
 nmap <F12> :YcmCompleter GoTo<CR>
-noremap <leader>y :let g:ycm_auto_trigger=0<CR>
-noremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+" Add \y to disable the YouCompleteMe autotrigger and \Y to enable it.
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 
 " NERD Tree
 " ===========================================================================
