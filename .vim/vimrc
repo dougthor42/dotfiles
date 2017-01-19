@@ -94,6 +94,9 @@ set hlsearch
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" ...unless an uppercase is typed
+" Make vim use normal regexes when searching...
+nnoremap / /\v
+vnoremap / /\v
 
 " Commands
 " ===========================================================================
