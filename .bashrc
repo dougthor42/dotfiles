@@ -172,7 +172,11 @@ alias python=python3
 alias python2=python2
 
 # Git aliases
+alias gl='git log --oneline --decorate --source'
 alias glt='git log `git describe --tags --abbrev=0`..HEAD --oneline --decorate --source'
+alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD --oneline --decorate --source'
+alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
+alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HEAD'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
