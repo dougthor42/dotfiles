@@ -182,6 +182,9 @@ alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HE
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Alias to show the Message of the Day
+alias motd='sudo run-parts /etc/update-motd.d/'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
