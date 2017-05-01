@@ -58,6 +58,9 @@ set listchars=tab:→\ ,extends:▸,precedes:◂,eol:¬
 " Use this line below if unicode isn't displaying correctly.
 " set listchars=tab:>\ ,extends:>,precedes:<
 set list
+set wildmenu		" Use a tab-able autocomplete menu on the command bar.
+set path+=**		" Have the "Find" command recursively search through subdirectories
+
 
 " Remove all trailing whitespace on save.
 function! <SID>StripTrailingWhitespace()
