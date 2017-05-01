@@ -109,10 +109,12 @@ map <leader>rr :source ~/.vim/vimrc<CR>
 
 " Folding
 " ===========================================================================
+" set foldenable			" Enable folding
 set foldmethod=indent		" Fold based on indent
+" set foldmethod=syntax		" Fold based on syntax
 set foldnestmax=3		" Deepest fold is 3 levels
 set foldlevel=5
-"set nofoldenable		" Don't fold by default
+" set nofoldenable		" Don't fold by default
 
 " Completion
 " ===========================================================================
@@ -168,6 +170,8 @@ set background=dark
 
 " YouCompleteMe
 " ===========================================================================
+" Disable YouCompleteMe by default
+let g:ycm_auto_trigger=0
 " Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
 nmap <leader>jd :YcmCompleter GoTo<CR>
 nmap <F12> :YcmCompleter GoTo<CR>
