@@ -245,5 +245,11 @@ endfunction
 " Use a built-in color schem so that things look nice even if the plugins
 " can't load.
 set background=dark
-colorscheme desert
+" Colors on Thorium (WSL) are not as good as PuTTY, so use a different
+" colorscheme there.
+if $HOSTNAME == 'THORIUM'
+	colorscheme elflord
+else
+	colorscheme desert
+endif
 

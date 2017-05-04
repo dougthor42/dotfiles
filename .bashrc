@@ -215,3 +215,5 @@ BRANCH="$C_CYANBRIGHT$(__git_ps1)"
 EOI="$C_RESET\n\$ "
 PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$EOI"
 
+# Export some environment variables
+export HOSTNAME
