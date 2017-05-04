@@ -249,6 +249,8 @@ set background=dark
 " colorscheme there.
 if $HOSTNAME == 'THORIUM'
 	colorscheme elflord
+elseif $HOSTNAME == 'Yggdrasil'
+	colorscheme elflord
 else
 	colorscheme desert
 endif
