@@ -61,6 +61,9 @@ set list
 set wildmenu		" Use a tab-able autocomplete menu on the command bar.
 set path+=**		" Have the "Find" command recursively search through subdirectories
 
+" Define the list of hosts that use Windows Subsystem for Linux (WSL).
+" These need special handling because WSL is not yet fully compatible.
+let WSL_Hosts=['thorium', 'yggdrasil', 'dthor-lt']
 
 " Remove all trailing whitespace on save.
 function! <SID>StripTrailingWhitespace()
@@ -136,7 +139,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
-Plug 'valloric/youcompleteme'
+if index(WSL_Hosts, tolower($HOSTNAME)) < 0		" Don't install on WSL.
+	Plug 'valloric/youcompleteme'
+endif
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'dhruvasagar/vim-table-mode'
@@ -250,9 +255,7 @@ endfunction
 set background=dark
 " Colors on Thorium (WSL) are not as good as PuTTY, so use a different
 " colorscheme there.
-if $HOSTNAME == 'THORIUM'
-	colorscheme elflord
-elseif $HOSTNAME == 'Yggdrasil'
+if index(WSL_Hosts, tolower($HOSTNAME)) >= 0
 	colorscheme elflord
 else
 	colorscheme desert
