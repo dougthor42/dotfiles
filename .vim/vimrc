@@ -189,6 +189,9 @@ nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 " Start NERDTree when VIM opens
 " autocmd vimenter * NERDTree		" Turns out this is super annoying
 
+" Default to showing hidden files and folders
+let NERDTreeShowHidden=1
+
 " Syntastic
 " ===========================================================================
 set statusline+=%#warnings#
