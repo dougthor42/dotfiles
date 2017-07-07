@@ -9,7 +9,7 @@
 	email = doug.thor@gmail.com
 [core]
 	eof=lf
-	autocrlf = false
+	autocrlf = input
 	editor = vim
 	filemode = false		# Ignore file modes (chmod)
 [push]
