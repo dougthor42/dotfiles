@@ -60,6 +60,8 @@ set listchars=tab:→\ ,extends:▸,precedes:◂,eol:¬
 set list
 set wildmenu		" Use a tab-able autocomplete menu on the command bar.
 set path+=**		" Have the "Find" command recursively search through subdirectories
+" set cursorline	" highlight the current line. Slows things down a bit too much for me.
+set lazyredraw		" Redraw only when we need to. Speeds up macros.
 
 " Define the list of hosts that use Windows Subsystem for Linux (WSL).
 " These need special handling because WSL is not yet fully compatible.
@@ -80,7 +82,8 @@ map <leader>w :call <SID>StripTrailingWhitespace()<CR>
 set nowrap
 set smartindent
 set autoindent
-set tabstop=8
+set tabstop=8		" number of visual spaces per <TAB>
+" set softtabstop=8	" number of spaces that <TAB< converts to when editing
 
 " Python Files
 autocmd BufNewFile,BufRead *.py
@@ -96,7 +99,7 @@ autocmd BufNewFile,BufRead *.js, *.html, *.css
 
 " Search Settings
 " ===========================================================================
-set hlsearch
+set hlsearch		" Highlight matches
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" ...unless an uppercase is typed
