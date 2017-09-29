@@ -4,9 +4,12 @@
 
 echo "Making symlinks for dotfiles..."
 
-# TODO: Refactor to not be brute-force...
-pwd
+# Save the current directory so we can CD back to it.
+curdir=$(pwd)
+
+# Change to the home dir. This isn't really needed.
 cd ~
+
 echo "Deleting old dotfiles."
 rm "/home/$USER/.bashrc"
 rm "/home/$USER/.bash_logout"
@@ -29,6 +32,9 @@ ln -s "/home/$USER/dotfiles/.tmux.conf" "/home/$USER/.tmux.conf"
 
 echo "Applying .bashrc"
 source "/home/$USER/.bashrc"
+
+# Make sure we move back to the dir the user was in.
+cd "$curdir"
 
 echo "Complete."
 
