@@ -27,5 +27,8 @@ ln -s "/home/$USER/dotfiles/.vim" "/home/$USER/.vim"
 ln -s "/home/$USER/dotfiles/.toprc" "/home/$USER/.toprc"
 ln -s "/home/$USER/dotfiles/.tmux.conf" "/home/$USER/.tmux.conf"
 
+echo "Applying .bashrc"
+source "/home/$USER/.bashrc"
+
 echo "Complete."
 
