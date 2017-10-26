@@ -142,9 +142,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
-if index(WSL_Hosts, tolower($HOSTNAME)) < 0		" Don't install on WSL.
-	Plug 'valloric/youcompleteme'
-endif
+" YouCompeleteMe is 500MB...
+" if index(WSL_Hosts, tolower($HOSTNAME)) < 0		" Don't install on WSL.
+	" Plug 'valloric/youcompleteme'
+" endif
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'dhruvasagar/vim-table-mode'
@@ -183,14 +184,18 @@ set background=dark
 
 " YouCompleteMe
 " ===========================================================================
-" Disable YouCompleteMe by default
-let g:ycm_auto_trigger=0
-" Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
-nmap <leader>jd :YcmCompleter GoTo<CR>
-nmap <F12> :YcmCompleter GoTo<CR>
-" Add \y to disable the YouCompleteMe autotrigger and \Y to enable it.
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+if exists(':YcmCompleter')
+	" Disable YouCompleteMe by default
+	let g:ycm_auto_trigger=0
+
+	" Add '\jd' and F12 as shortcuts for GoTo. F12 mimics Visual Studio
+	nmap <leader>jd :YcmCompleter GoTo<CR>
+	nmap <F12> :YcmCompleter GoTo<CR>
+
+	" Add \y to disable the YouCompleteMe autotrigger and \Y to enable it.
+	nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+	nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+endif
 
 " NERD Tree
 " ===========================================================================
