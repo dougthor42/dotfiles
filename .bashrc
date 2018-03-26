@@ -205,6 +205,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# If docker-machine is installed, then also add the docker-machine shell prompt
+DOCKER_MACHINE_PS=""
+if [ -n docker-machine version 2> /dev/null ]; then
+    DOCKER_MACHINE_PS=$(__docker_machine_ps1)
+fi
+
 # set a PS1 prompt with the time, user, host, location, and branch
 git_branch() { git branch 2> /dev/null | grep '^*' | colrm 1 2; }
 OLD_PWD=$C_PURPLEBRIGHT"Previous Dir: \$OLDPWD\n"
@@ -213,7 +219,7 @@ HOST=$C_GREENBRIGHT$USER'@\h'
 LOCATION=$C_YELLOWBRIGHT' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
 BRANCH="$C_CYANBRIGHT$(__git_ps1)"
 EOI="$C_RESET\n\$ "
-PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$EOI"
+PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$DOCKER_MACHINE_PS$EOI"
 
 # Export some environment variables
 export HOSTNAME
