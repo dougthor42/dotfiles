@@ -151,6 +151,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-fugitive'
 Plug 'rust-lang/rust.vim'
+Plug 'stephpy/vim-yaml'
+Plug 'pearofducks/ansible-vim'
 call plug#end()
 
 
@@ -256,6 +258,24 @@ endfunction
 function! LightlineModified()
   return &modified ? "+" : ''
 endfunction
+
+" Ansible-Vim
+" ===========================================================================
+" Force anything in a 'playbooks' folder to be considered Ansible.
+au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
+
+" Reset indent after two newlines
+let g:ansbile_unindent_after_newline = 1
+
+" Highlight things
+let g:ansible_attribute_highlight = "ab"
+let g:ansible_name_highlight = "b"
+let g:ansible_extra_keywords_highlight = 1
+let g:ansible_normal_keywords_highlight = 1
+let g:ansible_with_keywords_highlight = 1
+
+" Compat. with vim-yaml
+let g:ansible_yamlKeyName = 'yamlKey'
 
 
 " ===========================================================================
