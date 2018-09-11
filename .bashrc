@@ -172,9 +172,12 @@ alias python=python3
 alias python2=python2
 
 # Git aliases
-alias gl='git log --oneline --decorate --source --graph'
-alias glt='git log `git describe --tags --abbrev=0`..HEAD --oneline --decorate --source --graph'
-alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD --oneline --decorate --source --graph'
+# Formatting info: 'git log' docs and https://stackoverflow.com/q/1441010/1354930
+GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ai %C(bold cyan)%an %C(bold green)%d %Creset%s"'
+GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='$GIT_PRETTY_FORMAT
+alias gl='git log '$GIT_LOG_OPTS
+alias glt='git log `git describe --tags --abbrev=0`..HEAD '$GIT_LOG_OPTS
+alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '$GIT_LOG_OPTS
 alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
 alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HEAD'
 
