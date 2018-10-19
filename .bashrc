@@ -214,6 +214,11 @@ if [ -n docker-machine version 2> /dev/null ]; then
     DOCKER_MACHINE_PS=$(__docker_machine_ps1)
 fi
 
+# Have WSL connect to the remote Docker daemon running in Windows
+if [ grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ]; then
+  export DOCKER_HOST=tcp://0.0.0.0:2375
+fi
+
 # set a PS1 prompt with the time, user, host, location, and branch
 git_branch() { git branch 2> /dev/null | grep '^*' | colrm 1 2; }
 OLD_PWD=$C_PURPLEBRIGHT"Previous Dir: \$OLDPWD\n"
