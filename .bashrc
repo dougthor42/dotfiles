@@ -215,7 +215,7 @@ if [ -n docker-machine version 2> /dev/null ]; then
 fi
 
 # Have WSL connect to the remote Docker daemon running in Windows
-if [ grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ]; then
+if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null; then
   export DOCKER_HOST=tcp://0.0.0.0:2375
 fi
 
