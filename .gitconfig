@@ -14,3 +14,5 @@
 	filemode = false		# Ignore file modes (chmod)
 [push]
 	default = simple
+[pager]
+	branch = false
