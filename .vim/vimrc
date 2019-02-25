@@ -93,7 +93,7 @@ autocmd BufNewFile,BufRead *.py
 	\ set softtabstop=4
 
 " Javascript, HTML, and CSS
-autocmd BufNewFile,BufRead *.js, *.html, *.css
+autocmd BufNewFile,BufRead *.js,*.html,*.css
 	\ set tabstop=2 |
 	\ set softtabstop=2 |
 	\ set shiftwidth=2
