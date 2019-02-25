@@ -94,6 +94,7 @@ autocmd BufNewFile,BufRead *.py
 
 " Javascript, HTML, and CSS
 autocmd BufNewFile,BufRead *.js,*.html,*.css
+	\ set expandtab |
 	\ set tabstop=2 |
 	\ set softtabstop=2 |
 	\ set shiftwidth=2
