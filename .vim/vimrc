@@ -155,6 +155,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'rust-lang/rust.vim'
 Plug 'stephpy/vim-yaml'
 Plug 'pearofducks/ansible-vim'
+Plug 'pprovost/vim-ps1'
 call plug#end()
 
 
