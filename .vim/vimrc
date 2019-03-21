@@ -88,6 +88,7 @@ set tabstop=8		" number of visual spaces per <TAB>
 
 " Python Files
 autocmd BufNewFile,BufRead *.py
+	\ set foldmethod=indent |
 	\ set expandtab |
 	\ set shiftwidth=4 |
 	\ set softtabstop=4
@@ -117,12 +118,18 @@ map <leader>rr :source ~/.vim/vimrc<CR>
 
 " Folding
 " ===========================================================================
-" set foldenable			" Enable folding
+set foldenable			" Enable folding
 set foldmethod=indent		" Fold based on indent
 " set foldmethod=syntax		" Fold based on syntax
 set foldnestmax=3		" Deepest fold is 3 levels
 set foldlevel=5
 " set nofoldenable		" Don't fold by default
+
+" Press F9 to toggle a fold in any mode (insert, normal, o?, visual
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
+vnoremap <F9> zf
 
 " Completion
 " ===========================================================================
