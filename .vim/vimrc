@@ -100,6 +100,13 @@ autocmd BufNewFile,BufRead *.js,*.html,*.css
 	\ set softtabstop=2 |
 	\ set shiftwidth=2
 
+" PowerShell
+autocmd BufNewFile,BufRead *.ps1
+	\ set expandtab |
+	\ set tabstop=4 |
+	\ set shiftwidth=4 |
+	\ set softtabstop=4
+
 " Search Settings
 " ===========================================================================
 set hlsearch		" Highlight matches
