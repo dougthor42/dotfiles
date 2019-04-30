@@ -315,3 +315,12 @@ else
 	colorscheme desert
 endif
 
+" Colors for Diffs
+" Lines added: green text with black BG
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=0
+" Lines removed: red text with black BG
+highlight DiffDelete cterm=bold ctermfg=9 ctermbg=0
+" Lines that changed: Yellow text with black BG
+highlight DiffChange cterm=bold ctermfg=11 ctermbg=0
+" The specific text that changed within a line: White text with red BG
+highlight DiffText   cterm=bold ctermfg=15 ctermbg=1
