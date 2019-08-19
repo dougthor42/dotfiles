@@ -170,6 +170,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'stephpy/vim-yaml'
 Plug 'pearofducks/ansible-vim'
 Plug 'pprovost/vim-ps1'
+Plug 'chrisbra/csv.vim'
 call plug#end()
 
 
