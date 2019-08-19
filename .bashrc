@@ -233,3 +233,7 @@ PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$DOCKER_MACHINE_PS$EOI
 
 # Export some environment variables
 export HOSTNAME
+
+export PATH="/home/dthor/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
