@@ -180,6 +180,8 @@ alias glt='git log `git describe --tags --abbrev=0`..HEAD '$GIT_LOG_OPTS
 alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '$GIT_LOG_OPTS
 alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
 alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HEAD'
+# Watch the git log
+alias wgl='watch --color '"'"'git log --color=always '$GIT_LOG_OPTS"'"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
