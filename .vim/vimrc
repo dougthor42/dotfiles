@@ -107,6 +107,10 @@ autocmd BufNewFile,BufRead *.ps1
 	\ set shiftwidth=4 |
 	\ set softtabstop=4
 
+" HTBasic
+autocmd BufNewFile,BufRead *.htbasic
+	\ set filetype=htbasic
+
 " Search Settings
 " ===========================================================================
 set hlsearch		" Highlight matches
