@@ -175,6 +175,7 @@ Plug 'stephpy/vim-yaml'
 Plug 'pearofducks/ansible-vim'
 Plug 'pprovost/vim-ps1'
 Plug 'chrisbra/csv.vim'
+Plug 'psf/black'
 call plug#end()
 
 
