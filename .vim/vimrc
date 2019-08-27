@@ -63,6 +63,7 @@ set path+=**		" Have the "Find" command recursively search through subdirectorie
 " set cursorline	" highlight the current line. Slows things down a bit too much for me.
 set lazyredraw		" Redraw only when we need to. Speeds up macros.
 set visualbell		" Do not bing.
+set colorcolumn=80	" Highlight column 80
 
 " Define the list of hosts that use Windows Subsystem for Linux (WSL).
 " These need special handling because WSL is not yet fully compatible.
