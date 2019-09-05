@@ -177,6 +177,7 @@ Plug 'pearofducks/ansible-vim'
 Plug 'pprovost/vim-ps1'
 Plug 'chrisbra/csv.vim'
 Plug 'psf/black'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 
@@ -304,6 +305,19 @@ let g:ansible_with_keywords_highlight = 1
 " Compat. with vim-yaml
 let g:ansible_yamlKeyName = 'yamlKey'
 
+" vim-indent-guides
+" ---------------------------------------------------------------------------
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+" Set the 1st, 3rd, 5th, etc. to be a very dark gray
+" See the source code for /usr/bin/colortest-256 for values.
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=233
+" and the even ones to be a slightly lighter gray.
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+" Only 'highlight' the 1st column of the guide, not the whole indent.
+let g:indent_guides_guide_size = 1
+" And do not color the 1st indent, since that's just the start of line.
+let g:indent_guides_start_level = 2
 
 " ===========================================================================
 " End Plugins
