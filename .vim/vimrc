@@ -112,6 +112,13 @@ autocmd BufNewFile,BufRead *.ps1
 autocmd BufNewFile,BufRead *.htbasic
 	\ set filetype=htbasic
 
+" JSON
+autocmd BufNewFile,BufRead *.json
+	\ set expandtab |
+	\ set tabstop=4 |
+	\ set shiftwidth=4 |
+	\ set softtabstop=4
+
 " Search Settings
 " ===========================================================================
 set hlsearch		" Highlight matches
