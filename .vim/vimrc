@@ -185,6 +185,7 @@ Plug 'pprovost/vim-ps1'
 Plug 'chrisbra/csv.vim'
 Plug 'psf/black'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'glench/vim-jinja2-syntax'
 call plug#end()
 
 
