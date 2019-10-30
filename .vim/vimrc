@@ -129,11 +129,23 @@ set smartcase		" ...unless an uppercase is typed
 nnoremap / /\v
 vnoremap / /\v
 
-" Commands
+" Custom Commands
 " ===========================================================================
 let mapleader="\\"
 " Map '\rr' to reload the .vimrc file.
 map <leader>rr :source ~/.vim/vimrc<CR>
+
+" Execute any pre-commit checks.
+" We need to save the file first because they act on the disk data, not the
+" buffer data. The `silent` arg prevents the 'hey the file changed' warning.
+" The 'redraw!' fixes an issue where vim looks all bad when the command
+" finishes. Lastly we reload the file from disk using ':e', since pre-commit
+" modified it.
+command! PreCommitRun
+	\ execute ':w' |
+	\ execute 'silent !pre-commit run --files %' |
+	\ execute ':redraw!' |
+	\ execute ':e'
 
 " Folding
 " ===========================================================================
