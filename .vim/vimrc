@@ -147,6 +147,11 @@ command! PreCommitRun
 	\ execute ':redraw!' |
 	\ execute ':e'
 
+" Diff the current file with the swapfile.
+" See https://vi.stackexchange.com/q/15584/23712 and associated answers.
+noremap <leader>s <C-w>o:sav! .recovered<CR>:vs<CR><C-w>w:bn<CR>
+noremap <leader>t :wa<CR>:bp\|bd #<CR><C-o>
+
 " Folding
 " ===========================================================================
 set foldenable			" Enable folding
