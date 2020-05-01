@@ -185,7 +185,7 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
 " YouCompeleteMe is 500MB...
 " if index(WSL_Hosts, tolower($HOSTNAME)) < 0		" Don't install on WSL.
@@ -262,20 +262,19 @@ let NERDTreeIgnore=['\.swp$']
 
 " Syntastic
 " ===========================================================================
-set statusline+=%#warnings#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warnings#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " Python
 " Disable the 'python' checker becaus it compiles code.
 " And don't use 'pylint' because it's far too picky.
-let g:syntastic_python_checkers = ['flake8'] ", 'pylint']
-" let g:syntastic_python_flake8_args = ''
+" let g:syntastic_python_checkers = ['flake8'] ", 'pylint']
 
 " Table Mode
 " ===========================================================================
