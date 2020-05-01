@@ -16,3 +16,7 @@
 	default = simple
 [pager]
 	branch = false
+[alias]
+	# Show which files have been changed most often.
+	code-changes = "!git log --format=format: --name-only | /bin/grep -E -v '^$' | sort | uniq -c | sort -rg | head -n 10"
+	cc = "!git code-changes"
