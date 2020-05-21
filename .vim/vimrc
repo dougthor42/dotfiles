@@ -278,9 +278,14 @@ let NERDTreeIgnore=['\.swp$']
 
 " Table Mode
 " ===========================================================================
-" Use ReST-compatible tables
+" Use ReST-compatible tables by default
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
+" but support markdown
+autocmd BufNewFile,BufRead *.md,*.MD
+	\ let g:table_mode_corner="|" |
+	\ let g:table_mode_corner_corner="|" |
+	\ let g:table_mode_header_fillchar="-"
 
 " LightLine
 " ===========================================================================
