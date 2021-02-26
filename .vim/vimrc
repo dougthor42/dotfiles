@@ -203,6 +203,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'psf/black'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'glench/vim-jinja2-syntax'
+Plug 'triglav/vim-visual-increment'
 call plug#end()
 
 
@@ -279,6 +280,7 @@ let NERDTreeIgnore=['\.swp$']
 " Table Mode
 " ===========================================================================
 " Use ReST-compatible tables by default
+let g:table_mode_corner="+"
 let g:table_mode_corner_corner="+"
 let g:table_mode_header_fillchar="="
 " but support markdown
