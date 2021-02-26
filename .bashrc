@@ -166,6 +166,7 @@ alias cd..='cd ..'   # because I sometimes type too fast...
 alias cd!='cd $OLDPWD'      # allows fast switching to previous directory
 alias free='free -ht'
 alias mkdir='mkdir -pv'
+alias ip='ip -c'
 
 # Use python3 by default
 alias python=python3
