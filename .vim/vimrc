@@ -356,7 +356,7 @@ let g:indent_guides_start_level = 2
 
 " Default color scheme
 " ===========================================================================
-" Use a built-in color schem so that things look nice even if the plugins
+" Use a built-in color scheme so that things look nice even if the plugins
 " can't load.
 set background=dark
 " Colors on Thorium (WSL) are not as good as PuTTY, so use a different
