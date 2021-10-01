@@ -160,7 +160,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias dir='ls -AlFh --group-directories-first'
 lsp(){ ls -AlFh --group-directories-first --color=always "$@" | less -R; }
-alias df='df -h --total'
+alias df='df -h --total -T --exclude-type=squashfs'
 alias du='du -ch'
 alias cd..='cd ..'   # because I sometimes type too fast...
 alias cd!='cd $OLDPWD'      # allows fast switching to previous directory
