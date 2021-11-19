@@ -221,7 +221,7 @@ let g:rustfmt_autosave = 1
 let g:NERDSpaceDelims = 1
 
 " Align comments left instead of following code indentation
-let g:NERDDefaultAlign = 1
+let g:NERDDefaultAlign = 'left'
 
 " Comment and invert empty lines
 let g:NERDCommentEmptyLines = 1
