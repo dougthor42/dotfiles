@@ -187,6 +187,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 " Plug 'scrooloose/syntastic'
 Plug 'altercation/vim-colors-solarized'
+Plug 'NLKNguyen/papercolor-theme'
 " YouCompeleteMe is 500MB...
 " if index(WSL_Hosts, tolower($HOSTNAME)) < 0		" Don't install on WSL.
 	" Plug 'valloric/youcompleteme'
@@ -204,6 +205,8 @@ Plug 'psf/black'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'triglav/vim-visual-increment'
+" Extended syntax support
+Plug 'vim-python/python-syntax'
 call plug#end()
 
 
@@ -234,6 +237,31 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:solarized_termcolors = 256
 set background=dark
 " colorscheme solarized
+
+" PaperColor
+" ===========================================================================
+" Have the colorscheme highlight python builtins
+" Set the background to pure black
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins': 1
+  \     }
+  \   },
+  \   'theme': {
+  \     'default.dark': {
+  \       'override' : {
+  \         'color00': ['#000000', '0']
+  \       }
+  \     }
+  \   }
+  \ }
+
+" Python Syntax
+" ===========================================================================
+" Enable all highlight options, except for previously set.
+let g:python_highlight_all = 1
+
 
 " YouCompleteMe
 " ===========================================================================
@@ -359,13 +387,14 @@ let g:indent_guides_start_level = 2
 " Use a built-in color scheme so that things look nice even if the plugins
 " can't load.
 set background=dark
+colorscheme PaperColor
 " Colors on Thorium (WSL) are not as good as PuTTY, so use a different
 " colorscheme there.
-if index(WSL_Hosts, tolower($HOSTNAME)) >= 0
-	colorscheme elflord
-else
-	colorscheme desert
-endif
+" if index(WSL_Hosts, tolower($HOSTNAME)) >= 0
+"         colorscheme elflord
+" else
+"         colorscheme desert
+" endif
 
 " Colors for Diffs
 " Lines added: green text with black BG
