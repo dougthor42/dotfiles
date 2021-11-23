@@ -119,6 +119,12 @@ autocmd BufNewFile,BufRead *.json
 	\ set shiftwidth=4 |
 	\ set softtabstop=4
 
+autocmd BufNewFile,BufRead *.yaml,*.yml
+	\ set expandtab |
+	\ set tabstop=4 |
+	\ set shiftwidth=2 |
+	\ set softtabstop=2
+
 " Search Settings
 " ===========================================================================
 set hlsearch		" Highlight matches
