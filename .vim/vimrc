@@ -258,14 +258,18 @@ let g:PaperColor_Theme_Options = {
   \   },
   \   'theme': {
   \     'default.dark': {
+  \       'transparent_background': 1,
   \       'override' : {
-  \         'color00': ['#000000', '0'],
   \         'linenumber_bg': ['#000000', '0'],
   \         'cursorcolumn': ['#800000', '1']
   \       }
   \     }
   \   }
   \ }
+" Originally I had
+"         'color00': ['#000000', '0'],
+" but my tmux config relys on tranparent background for slightly adjusting
+" background colors of active panes.
 
 " Python Syntax
 " ===========================================================================
