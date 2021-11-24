@@ -248,6 +248,8 @@ set background=dark
 " ===========================================================================
 " Have the colorscheme highlight python builtins
 " Set the background to pure black
+" Set the line numbers to use a black background
+" Set the 80-character column to dark red
 let g:PaperColor_Theme_Options = {
   \   'language': {
   \     'python': {
@@ -257,7 +259,10 @@ let g:PaperColor_Theme_Options = {
   \   'theme': {
   \     'default.dark': {
   \       'override' : {
-  \         'color00': ['#000000', '0']
+  \         'color00': ['#000000', '0'],
+  \         'linenumber_bg': ['#000000', '0'],
+  \         'linenumber_fg': ['#FFFF00', '11'],
+  \         'cursorcolumn': ['#800000', '1']
   \       }
   \     }
   \   }
