@@ -261,7 +261,6 @@ let g:PaperColor_Theme_Options = {
   \       'override' : {
   \         'color00': ['#000000', '0'],
   \         'linenumber_bg': ['#000000', '0'],
-  \         'linenumber_fg': ['#FFFF00', '11'],
   \         'cursorcolumn': ['#800000', '1']
   \       }
   \     }
