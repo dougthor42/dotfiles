@@ -250,6 +250,11 @@ set background=dark
 " Set the background to pure black
 " Set the line numbers to use a black background
 " Set the 80-character column to dark red
+" Set 'storage class keywords' (color06), whatever those are, to a blueish.
+"   This is so that git rebase -i uses a color for commit hashes that is
+"   significantly different than the color for commit messages,
+"   similar to the 'elflord' colorscheme.
+" Set 'highlight' (color15) to bright yellow
 let g:PaperColor_Theme_Options = {
   \   'language': {
   \     'python': {
@@ -261,7 +266,9 @@ let g:PaperColor_Theme_Options = {
   \       'transparent_background': 1,
   \       'override' : {
   \         'linenumber_bg': ['#000000', '0'],
-  \         'cursorcolumn': ['#800000', '1']
+  \         'cursorcolumn': ['#800000', '1'],
+  \         'color06': ['#005f87', '24'],
+  \         'color15': ['#ffff00', '11']
   \       }
   \     }
   \   }
