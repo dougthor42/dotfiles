@@ -125,6 +125,12 @@ autocmd BufNewFile,BufRead *.yaml,*.yml
 	\ set shiftwidth=2 |
 	\ set softtabstop=2
 
+autocmd BufNewFile,BufRead *.go
+	\ set noexpandtab |
+	\ set tabstop=4 |
+	\ set shiftwidth=4 |
+	\ set softtabstop=4
+
 " Search Settings
 " ===========================================================================
 set hlsearch		" Highlight matches
