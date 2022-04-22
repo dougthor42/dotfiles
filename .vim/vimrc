@@ -213,7 +213,7 @@ Plug 'stephpy/vim-yaml'
 Plug 'pearofducks/ansible-vim'
 Plug 'pprovost/vim-ps1'
 Plug 'chrisbra/csv.vim'
-Plug 'psf/black'
+Plug 'psf/black', { 'branch': 'main' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'triglav/vim-visual-increment'
