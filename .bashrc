@@ -247,3 +247,7 @@ fi
 
 # Add golang to PATH
 export PATH="$PATH:/usr/local/go/bin"
+
+# PGP (GPG: GnuPG) - Make sure the GPG_TTY is set, otherwise
+# you get "Inappropriate ioctl for device" errors.
+export GPG_TTY=$(tty)
