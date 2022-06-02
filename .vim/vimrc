@@ -65,6 +65,10 @@ set lazyredraw		" Redraw only when we need to. Speeds up macros.
 set visualbell		" Do not bing.
 set colorcolumn=80	" Highlight column 80
 
+" Disable the F1 key (normally shows help) because some keyboards have it too
+" close to ESC...
+nmap <F1> <nop>
+
 " Define the list of hosts that use Windows Subsystem for Linux (WSL).
 " These need special handling because WSL is not yet fully compatible.
 let WSL_Hosts=['thorium', 'yggdrasil', 'dthor-lt']
