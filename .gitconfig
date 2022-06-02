@@ -23,6 +23,12 @@
 	# Show which files have been changed most often.
 	code-changes = "!git log --format=format: --name-only | /bin/grep -E -v '^$' | sort | uniq -c | sort -rg | head -n 10"
 	cc = "!git code-changes"
+	# Prune any local squashed-and-merged branches.
+	# Usage:
+	#   git prune-squash-merged
+	#   git prune-squash-merged -n
+	#   git prune-squash-merged --dry-run
+	prune-squash-merged = "!bash $HOME/dotfiles/git_prune_squash_merged.sh"
 [commit]
 	gpgsign = true
 [tag]
