@@ -71,7 +71,7 @@ nmap <F1> <nop>
 
 " Define the list of hosts that use Windows Subsystem for Linux (WSL).
 " These need special handling because WSL is not yet fully compatible.
-let WSL_Hosts=['thorium', 'yggdrasil', 'dthor-lt']
+let WSL_Hosts=['thorium', 'yggdrasil', 'dthor-lt', 'odin']
 
 " Remove all trailing whitespace on save.
 function! <SID>StripTrailingWhitespace()
