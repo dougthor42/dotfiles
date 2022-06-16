@@ -221,6 +221,7 @@ Plug 'psf/black', { 'branch': 'main' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'triglav/vim-visual-increment'
+Plug 'unblevable/quick-scope'
 " Extended syntax support
 Plug 'vim-python/python-syntax'
 call plug#end()
@@ -408,6 +409,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 let g:indent_guides_guide_size = 1
 " And do not color the 1st indent, since that's just the start of line.
 let g:indent_guides_start_level = 2
+
+" quick-scope
+" ---------------------------------------------------------------------------
+" Disable on long lines.
+let g:qs_max_chars=200
 
 " ===========================================================================
 " End Plugins
