@@ -318,8 +318,8 @@ endif
 " Default to showing hidden files and folders
 let NERDTreeShowHidden=1
 
-" Do not show vim swapfiles
-let NERDTreeIgnore=['\.swp$']
+" Do not show vim swapfiles or anything in __pycache__
+let NERDTreeIgnore=['\.swp$', '__pycache__']
 
 " Syntastic
 " ===========================================================================
