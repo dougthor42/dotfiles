@@ -222,6 +222,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'glench/vim-jinja2-syntax'
 Plug 'triglav/vim-visual-increment'
 Plug 'unblevable/quick-scope'
+Plug 'yegappan/grep'
 " Extended syntax support
 Plug 'vim-python/python-syntax'
 call plug#end()
