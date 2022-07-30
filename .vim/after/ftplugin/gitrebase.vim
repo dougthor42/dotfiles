@@ -4,4 +4,4 @@
 " See https://github.com/vim/vim/issues/9845 for the Issue and
 " https://github.com/vim/vim/issues/9845#issuecomment-1051232851 for this
 " workaround.
-setlocal keywordprg=git\ show
+setlocal keywordprg=git\ show\ --patch-with-stat
