@@ -201,7 +201,7 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'altercation/vim-colors-solarized'
 Plug 'NLKNguyen/papercolor-theme'
 " YouCompeleteMe is 500MB...
@@ -322,21 +322,16 @@ let NERDTreeShowHidden=1
 " Do not show vim swapfiles or anything in __pycache__
 let NERDTreeIgnore=['\.swp$', '__pycache__']
 
-" Syntastic
+" ALE
 " ===========================================================================
-" set statusline+=%#warnings#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" Python
-" Disable the 'python' checker becaus it compiles code.
-" And don't use 'pylint' because it's far too picky.
-" let g:syntastic_python_checkers = ['flake8'] ", 'pylint']
+" Disable all linters except the ones I like.
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+	\ 'go': ['golint'],
+	\ 'json': ['jsonlint'],
+	\ 'python': ['flake8'],
+	\ 'yaml': ['yamllint'],
+	\}
 
 " Table Mode
 " ===========================================================================
