@@ -20,6 +20,12 @@
 	autocrlf = input
 	editor = vim
 	filemode = false		# Ignore file modes (chmod)
+	# Use diff-highlight if possible so that individual word changes are
+	# highlighted. On gLinux, /usr/share/doc/git/contrib/diff-highlight
+	# must be added to $PATH
+	# See https://yaqs.corp.google.com/eng/q/5365110896984064 and
+	# https://stackoverflow.com/a/15149253/1354930
+	pager = "(diff-highlight 2>/dev/null || cat) | ${PAGER:-less}"
 [push]
 	default = simple
 	gpgsign = if-asked
@@ -35,7 +41,14 @@
 	#   git prune-squash-merged -n
 	#   git prune-squash-merged --dry-run
 	prune-squash-merged = "!bash $HOME/dotfiles/git_prune_squash_merged.sh"
+	# Show the full history for a file.
+	history = "!git log -p -M --follow --stat --"
 [commit]
 	gpgsign = true
 [tag]
 	gpgsign = true
+[diff]
+	wsErrorHighlight = all
+[interactive]
+	# Also use diff-highlight during `git add -p`, etc.
+	diffFilter = "(diff-highlight 2>/dev/null || cat)"

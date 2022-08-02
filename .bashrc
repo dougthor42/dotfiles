@@ -246,6 +246,9 @@ fi
 # Add golang to PATH
 export PATH="$PATH:/usr/local/go/bin"
 
+# Add git/contrib/diff-highlight to PATH. See comment in .gitconfig[core]
+export PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
+
 # PGP (GPG: GnuPG) - Make sure the GPG_TTY is set, otherwise
 # you get "Inappropriate ioctl for device" errors.
 export GPG_TTY=$(tty)
