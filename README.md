@@ -2,13 +2,22 @@
 
 This project contains my dotfiles.
 
+## Prerequisites
+
++ GNU Privacy Guard (gpg) should be installed: `sudo apt install gpg`
++ tmux should be installed: `sudo apt install tmux`
++ tmux Plugin Manager (tpm) should be installed via basic GitHub checkout. See
+  the [tpm repo](https://github.com/tmux-plugins/tpm).
++ pyenv should be installed via basic GitHub checkout. See the
+  [pyenv repo](https://github.com/pyenv/pyenv#basic-github-checkout).
++ `diff-highlight` should be compiled:
+   `sudo make -C /usr/share/doc/git/contrib/diff-highlight`
+
+
 ## Setup
+
 When first adding this to a host, follow these steps:
 
 1.  `cd ~`
 2.  `git clone https://github.com/dougthor42/dotfiles.git`
-3.  `ln -s ~/dotfiles/.bashrc ~/.bashrc`
-4.  Repeat step 3 for all files in this repo, deleting any
-    existing files as needed.
-5.  Lastly, make sure to run `. ~/.bashrc` to update bash.
-
+3.  `. ./dotfiles/mklinks.sh`
