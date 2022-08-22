@@ -33,12 +33,12 @@ fi;
 git checkout -q master &&
 git for-each-ref refs/heads/ "--format=%(refname:short)" |
 while read branch;
-do mergeBase=$(git merge-base master $branch) &&
-	[[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] &&
+do mergeBase=$(git merge-base master "$branch") &&
+	[[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]] &&
 	if [[ $DRY_RUN -eq 1 ]]
 	then
 		echo "$branch is merged into master and can be deleted";
 	else
-		git branch -D $branch;
+		git branch -D "$branch";
 	fi;
 done
