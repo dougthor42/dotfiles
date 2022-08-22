@@ -20,5 +20,5 @@ fi
 # Now iterate through the directory looking for subdirectories.
 for d in "$dir"/*/; do
 	echo "$d"
-	git -C "$d" branch --color=always -lav
+	git -C "$d" branch --color=always -lav 2> /dev/null || echo "  Not a git repo"
 done
