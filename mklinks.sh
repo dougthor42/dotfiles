@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Run this when first cloning the dotfiles repo to
 # a new user directory.
+#
+# Disable "not following" shellcheck notice.
+# shellcheck disable=SC1091
 
 echo "Making symlinks for dotfiles..."
 
@@ -8,7 +11,7 @@ echo "Making symlinks for dotfiles..."
 curdir=$(pwd)
 
 # Change to the home dir. This isn't really needed.
-cd ~
+cd ~ || return
 
 # Add support for different home directories.
 homedir="/home/$USER"
@@ -40,7 +43,7 @@ echo "Applying $homedir/.bashrc"
 source "$homedir/.bashrc"
 
 # Make sure we move back to the dir the user was in.
-cd "$curdir"
+cd "$curdir" || return
 
 echo "Complete."
 
