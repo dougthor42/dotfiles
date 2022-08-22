@@ -3,16 +3,13 @@
 # directory and lists the git `branch -lav` result
 # for each one
 
-# Save our current working directory to move back to it later.
-cwd=$(pwd)
-
 # Check to see that we have a valid argument.
 dir=$1
 if [[ ! $dir ]]
 then
 	echo "No directory given; using current working direcotry."
 	dir=$(pwd)
-elif [ -d $dir ]
+elif [ -d "$dir" ]
 then
 	echo "Looking for git repositories in '$dir'."
 else
@@ -21,7 +18,7 @@ else
 fi
 
 # Now iterate through the directory looking for subdirectories.
-for d in $dir/*/; do
+for d in "$dir"/*/; do
 	echo "$d"
-	git -C $d branch --color=always -lav
+	git -C "$d" branch --color=always -lav
 done
