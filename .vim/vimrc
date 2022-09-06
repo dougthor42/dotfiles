@@ -201,7 +201,7 @@ set sidescrolloff=15     " or 15 columns away from the edge.
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'altercation/vim-colors-solarized'
 Plug 'NLKNguyen/papercolor-theme'
 " YouCompeleteMe is 500MB...
@@ -332,6 +332,11 @@ let g:ale_linters = {
 	\ 'python': ['flake8'],
 	\ 'yaml': ['yamllint'],
 	\}
+" Support flake8 from a specific virtual env
+if filereadable(expand('~/.virtualenvs/pyle/bin/flake8'))
+	let g:ale_python_flake8_executable = expand('~/.virtualenvs/pyle/bin/flake8')
+	let g:ale_python_flake8_use_global = 1
+endif
 
 " Table Mode
 " ===========================================================================
