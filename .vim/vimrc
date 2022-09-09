@@ -214,6 +214,7 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-fugitive'
 Plug 'rust-lang/rust.vim'
 Plug 'stephpy/vim-yaml'
+Plug 'cespare/vim-toml', { 'branch': 'main' }  " Not needed in vim >= 8.2.3519
 Plug 'pearofducks/ansible-vim'
 Plug 'pprovost/vim-ps1'
 Plug 'chrisbra/csv.vim'
