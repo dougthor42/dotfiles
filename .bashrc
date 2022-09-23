@@ -252,3 +252,6 @@ export PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
 # PGP (GPG: GnuPG) - Make sure the GPG_TTY is set, otherwise
 # you get "Inappropriate ioctl for device" errors.
 export GPG_TTY=$(tty)
+
+# Rust/Cargo
+. "$HOME/.cargo/env"
