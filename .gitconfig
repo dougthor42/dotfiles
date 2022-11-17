@@ -43,6 +43,8 @@
 	prune-squash-merged = "!bash $HOME/dotfiles/git_prune_squash_merged.sh"
 	# Show the full history for a file.
 	history = "!git log -p -M --follow --stat --"
+	# Show branch origins
+	show-branch-origin = "!bash $HOME/dotfiles/git_show_branch_origin.sh"
 [commit]
 	gpgsign = true
 [tag]
