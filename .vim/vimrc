@@ -16,6 +16,10 @@ runtime! debian.vim
 " and will actually override `vim -C`
 set nocompatible
 
+" Fix backspace. See `:h 'backspace' and https://vi.stackexchange.com/a/2163/23712
+" I'm not sure what changed, but this will make sure it doesn't break again.
+set backspace=indent,eol,start
+
 " Source a global configuration file if available
 " Do this early on so that it doesn't override any of my settings
 if filereadable("/etc/vim/vimrc.local")
