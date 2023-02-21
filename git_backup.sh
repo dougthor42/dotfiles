@@ -24,6 +24,7 @@
 #   + Fast-forward push. If it can't do that, then
 #   + create new branch `<branch name>-<user email>-backup-<timestamp>` and pushes
 #     that instead.
+# + When all that's done: return to the original working dir and branch.
 
 function show_help() {
 	cat <<-EOF
@@ -54,11 +55,75 @@ function new_branch() {
 	echo "$(current_branch)"
 }
 
+
+ORIGINAL_DIR=$(pwd)
+ORIGINAL_BRANCH=$(current_branch)
+
+
 function backup() {
 	echo "backing up"
+	DRY_RUN=1
+
+	initial_branch="$(current_branch)"
+
+	if [[ $DRY_RUN -eq 1 ]]
+	then
+		echo "Would create branch: $(new_branch)"
+	else
+		git checkout -b "$(new_branch)"
+	fi
+
+	if [[ $DRY_RUN -eq 1 ]]
+	then
+		echo "Would switch to repo root."
+	else
+		cd "$(git rev-parse --show-toplevel)"
+	fi
+
+	if [[ $DRY_RUN -eq 1 ]]
+	then
+		echo "Would add all files."
+	else
+		git add -A
+	fi
+
+	message="Git backup. Branch $(current_branch)."
+	if [[ $DRY_RUN -eq 1 ]]
+	then
+		echo "Would commit with message '$message'"
+	else
+		git commit -m "$message" --no-verify
+	fi
+
+	for remote in $(git remote); do
+		if [[ $DRY_RUN -eq 1 ]]
+		then
+			echo "Would push to remote '${remote}'"
+		else
+			git push --no-verify --set-upstream "${remote}" "$(current_branch)" || true
+		fi
+	done
+
+	# Push stashes too
+	if [[ "$(git stash list)" != "" ]]
+	then
+		for sha in $(git rev-list -g stash)
+		do
+			if [[ $DRY_RUN -eq 1 ]]
+			then
+				echo "Would push to remote stash '${sha}'"
+			else
+				echo ""
+			fi
+		done
+	else
+		echo "No local stashes."
+	fi
+
 }
 
 case $1 in
+	-n|--dry-run) echo "dry run"; exit 0 ;;
 	-h|--help) show_help; exit 0 ;;
 esac
 
