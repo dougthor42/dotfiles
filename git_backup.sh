@@ -60,6 +60,18 @@ ORIGINAL_DIR=$(pwd)
 ORIGINAL_BRANCH=$(current_branch)
 
 
+function backup_stashes()  {
+	for sha in $(git rev-list -g stash)
+	do
+		if [[ $DRY_RUN -eq 1 ]]
+		then
+			echo "Would push to remote stash '${sha}'"
+		else
+			git push --no-verify origin "$sha":refs/heads/"$(current_branch $initial_branch)"-stash-"$sha"
+		fi
+	done
+}
+
 function backup() {
 	echo "backing up"
 	DRY_RUN=1
@@ -107,19 +119,13 @@ function backup() {
 	# Push stashes too
 	if [[ "$(git stash list)" != "" ]]
 	then
-		for sha in $(git rev-list -g stash)
-		do
-			if [[ $DRY_RUN -eq 1 ]]
-			then
-				echo "Would push to remote stash '${sha}'"
-			else
-				echo ""
-			fi
-		done
+		backup_stashes
 	else
 		echo "No local stashes."
 	fi
 
+
+	printf "\n\nJob's done.\n"
 }
 
 case $1 in
