@@ -1,0 +1,11 @@
+# .inputrc
+#
+# Affects all programs that use GNU readline.
+
+# Map CTRL-B to "backspace to previous word boundary"
+# Eg:
+#     cd /foo/bar/baz<CTRL-B>
+#     cd /foo/bar
+# from https://superuser.com/a/862304/184616 and related answers.
+# See `bind -P` for other potential bindings (-P means "print"
+C-b:unix-filename-rubout

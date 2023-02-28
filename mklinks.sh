@@ -14,6 +14,7 @@ curdir=$(pwd)
 cd ~ || return
 
 echo "Deleting old dotfiles."
+cp "$HOME/.inputrc" "$HOME/.inputrc.bak" || true
 rm "$HOME/.bashrc"
 rm "$HOME/.bash_logout"
 rm "$HOME/.gitconfig"
@@ -25,6 +26,7 @@ rm "$HOME/.tmux.conf"
 rm "$HOME/.gnupg/gpg-agent.conf"
 
 echo "Creating symlinks for dotfiles."
+ln -s "$HOME/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/dotfiles/.bashrc" "$HOME/.bashrc"
 ln -s "$HOME/dotfiles/.bash_logout" "$HOME/.bash_logout"
 ln -s "$HOME/dotfiles/.gitconfig" "$HOME/.gitconfig"
