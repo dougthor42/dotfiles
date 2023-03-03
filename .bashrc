@@ -176,6 +176,7 @@ alias python2=python2
 # Formatting info: 'git log' docs and https://stackoverflow.com/q/1441010/1354930
 GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ai %C(bold cyan)%an %C(bold green)%d %C(white)%s"'
 GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='$GIT_PRETTY_FORMAT
+GIT_LOG_CSV_FORMAT='format:"%h|%ai|%an|%d|%s"'
 alias gl='git log '$GIT_LOG_OPTS
 alias glt='git log `git describe --tags --abbrev=0`..HEAD '$GIT_LOG_OPTS
 alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '$GIT_LOG_OPTS
@@ -183,6 +184,7 @@ alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
 alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HEAD'
 # Watch the git log
 alias wgl='watch --color '"'"'git log --color=always '$GIT_LOG_OPTS"'"
+alias gl_csv='git log --oneline --decorate --source --pretty='$GIT_LOG_CSV_FORMAT
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
