@@ -27,7 +27,7 @@ do
 	shift
 done
 
-echo "Pruning local branches that were squashed and merged onto master..."
+echo "Pruning local branches that were squashed and merged onto $MAIN_BRANCH..."
 if [[ $DRY_RUN -eq 1 ]]
 then
 	echo "DRY RUN - no branches will be deleted.";
@@ -35,21 +35,21 @@ fi;
 
 # Prune local branches that we squashed and merged.
 # See https://stackoverflow.com/a/56026209/1354930
-git checkout -q master &&
+git checkout -q $MAIN_BRANCH &&
 git for-each-ref refs/heads/ "--format=%(refname:short)" |
 while read branch;
 do
 	# Get the merge-base. The merge-base is the "best common ancestor(s)
 	# between two commits". Eg: the commit on master that a branch was
 	# created from.
-	mergeBase=$(git merge-base master "$branch");
+	mergeBase=$(git merge-base $MAIN_BRANCH "$branch");
 
 	# Default case: we don't delete anything.
 	WILL_DELETE=0;
 
 	# Test if that branch has been squash-merged onto master.
 	# This is black magic to me.
-	if [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]]
+	if [[ $(git cherry $MAIN_BRANCH $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]]
 	then
 		# Technically we don't need to set this here, but I like having it.
 		WILL_DELETE=1;
@@ -96,7 +96,7 @@ do
 	if [[ $DRY_RUN -eq 1 ]]
 	then
 		WILL_DELETE=0
-		echo "$branch is merged into master and can be deleted";
+		echo "$branch is merged into $MAIN_BRANCH and can be deleted";
 	fi;
 
 	if [[ $WILL_DELETE -eq 1 ]]
