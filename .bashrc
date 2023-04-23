@@ -257,3 +257,5 @@ export GPG_TTY=$(tty)
 
 # Rust/Cargo
 . "$HOME/.cargo/env"
+
+complete -C /usr/bin/terraform terraform

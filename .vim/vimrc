@@ -230,6 +230,7 @@ Plug 'unblevable/quick-scope'
 Plug 'yegappan/grep'
 " Extended syntax support
 Plug 'vim-python/python-syntax'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 
