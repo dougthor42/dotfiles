@@ -44,6 +44,10 @@ do
 	# created from.
 	mergeBase=$(git merge-base $MAIN_BRANCH "$branch");
 
+	# uncomment these two lines to see what the mergeBase for each branch is
+	# branch_name=$(git --no-pager show -s --format="%D" $mergeBase)
+	# echo "Merge base for $branch is $mergeBase and has branch=$branch_name";
+
 	# Default case: we don't delete anything.
 	WILL_DELETE=0;
 
