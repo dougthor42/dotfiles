@@ -45,6 +45,9 @@
 	history = "!git log -p -M --follow --stat --"
 	# Show branch origins
 	show-branch-origin = "!bash $HOME/dotfiles/git_show_branch_origin.sh"
+	# Print what the previous checked-out branch was.
+	# Useful for "previewing" `git checkout -`
+	last-branch = "!git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1}"
 [commit]
 	gpgsign = true
 [tag]
