@@ -176,6 +176,10 @@ command! PreCommitRun
 noremap <leader>s <C-w>o:sav! .recovered<CR>:vs<CR><C-w>w:bn<CR>
 noremap <leader>t :wa<CR>:bp\|bd #<CR><C-o>
 
+" Write to file when you forget to sudo
+" TODO: test this
+" noremap :w !sudo tee %
+
 " Folding
 " ===========================================================================
 set foldenable			" Enable folding
@@ -232,6 +236,8 @@ Plug 'glench/vim-jinja2-syntax'
 Plug 'triglav/vim-visual-increment'
 Plug 'unblevable/quick-scope'
 Plug 'yegappan/grep'
+Plug 'ustcyue/proto-number'
+Plug 'ap/vim-css-color'  " Color things like #d13632 and #666
 " Extended syntax support
 Plug 'vim-python/python-syntax'
 Plug 'hashivim/vim-terraform'
