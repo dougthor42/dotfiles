@@ -237,7 +237,7 @@ Plug 'triglav/vim-visual-increment'
 Plug 'unblevable/quick-scope'
 Plug 'yegappan/grep'
 Plug 'ustcyue/proto-number'
-Plug 'ap/vim-css-color'  " Color things like #d13632 and #666
+Plug 'lilydjwg/colorizer'  " Color things like #d13632 and #666 and rgb(50, 50, 225)
 " Extended syntax support
 Plug 'vim-python/python-syntax'
 Plug 'hashivim/vim-terraform'
