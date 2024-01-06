@@ -86,6 +86,40 @@ endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 map <leader>w :call <SID>StripTrailingWhitespace()<CR>
 
+" Run the formatter for the current filetype, if possible.
+function! <SID>RunFormatter()
+	let l:ftype = &filetype
+	let l:known_formatters = {
+		\ "python": ["ruff-format", "Black"],
+		\ "go": ["gofmt"],
+		\ "rust": ["rustfmt"],
+		\ "vim": ["fake_vimfmt"]
+		\ }
+
+	if l:ftype == ""
+		echom "filetype is not set; can't format."
+		return 1
+	endif
+
+	if index(keys(l:known_formatters), l:ftype) < 0
+		let l:message = "Don't know how to format filetype=" .. l:ftype
+		echom l:message
+		return 1
+	endif
+
+	" We know what formatter to run!
+	let l:formatters = l:known_formatters[l:ftype]
+	" echom "Can format."
+	for l:formatter in l:formatters
+		" echom "Trying " .. l:formatter
+		try
+			echom "Successfully formatted using " .. l:formatter
+		catch
+			echom "bar"
+		endtry
+	return 0
+endfunction
+
 " Indenting
 " ===========================================================================
 " Defaults
@@ -170,6 +204,9 @@ command! PreCommitRun
 	\ execute 'silent !pre-commit run --files %' |
 	\ execute ':redraw!' |
 	\ execute ':e'
+
+" Run the formatter for the current filetype.
+command! Fmt :call <SID>RunFormatter()
 
 " Diff the current file with the swapfile.
 " See https://vi.stackexchange.com/q/15584/23712 and associated answers.
@@ -347,6 +384,10 @@ let g:ale_linters = {
 	\ 'json': ['jsonlint'],
 	\ 'python': ['ruff'],
 	\ 'yaml': ['yamllint'],
+	\}
+let g:ale_fixers = {
+	\ 'go': ['gofmt'],
+	\ 'python': ['ruff', 'black'],
 	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
