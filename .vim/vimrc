@@ -67,7 +67,7 @@ set path+=**		" Have the "Find" command recursively search through subdirectorie
 " set cursorline	" highlight the current line. Slows things down a bit too much for me.
 set lazyredraw		" Redraw only when we need to. Speeds up macros.
 set visualbell t_vb=	" Do not bing/beep or flash or send any bell codes.
-set colorcolumn=80	" Highlight column 80
+set colorcolumn=80,100	" Highlight column 80 and 100
 
 " Disable the F1 key (normally shows help) because some keyboards have it too
 " close to ESC...
