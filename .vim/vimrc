@@ -171,6 +171,11 @@ command! PreCommitRun
 	\ execute ':redraw!' |
 	\ execute ':e'
 
+" lol 'ALEFix' is too long. Also lets me always use the same command if I
+" decide to switch formatters.
+command! Fmt
+	\ execute ':ALEFix'
+
 " Diff the current file with the swapfile.
 " See https://vi.stackexchange.com/q/15584/23712 and associated answers.
 noremap <leader>s <C-w>o:sav! .recovered<CR>:vs<CR><C-w>w:bn<CR>
@@ -340,6 +345,9 @@ let NERDTreeIgnore=['\.swp$', '__pycache__']
 
 " ALE
 " ===========================================================================
+" TODO I want to play with this virtualtext highlighting more.
+" highlight link ALEVirtualTextError Error
+let g:ale_virtualtext_delay = 100  " ms
 " Disable all linters except the ones I like.
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
@@ -348,10 +356,17 @@ let g:ale_linters = {
 	\ 'python': ['ruff'],
 	\ 'yaml': ['yamllint'],
 	\}
+" Enable some autoformatters
+let g:ale_fixers = {
+	\ 'go': ['gofmt'],
+	\ 'python': ['ruff_format', 'black'],
+	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
 	let g:ale_python_ruff_executable = expand('~/.virtualenvs/pyle/bin/ruff')
 	let g:ale_python_ruff_use_global = 1
+	let g:ale_python_ruff_format_executable = expand('~/.virtualenvs/pyle/bin/ruff')
+	let g:ale_python_ruff_format_use_global = 1
 endif
 
 " Table Mode
