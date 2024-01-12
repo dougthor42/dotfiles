@@ -356,10 +356,11 @@ let g:ale_linters = {
 	\ 'python': ['ruff'],
 	\ 'yaml': ['yamllint'],
 	\}
-" Enable some autoformatters
+" Enable some autoformatters. Note that the list of fixers are all done in
+" order, it's not a 'fallback' list.
 let g:ale_fixers = {
 	\ 'go': ['gofmt'],
-	\ 'python': ['ruff_format', 'black'],
+	\ 'python': ['ruff_format'],
 	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
