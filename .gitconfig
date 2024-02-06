@@ -57,3 +57,8 @@
 [interactive]
 	# Also use diff-highlight during `git add -p`, etc.
 	diffFilter = "(diff-highlight 2>/dev/null || cat)"
+[rerere]
+	# https://git-scm.com/book/en/v2/Git-Tools-Rerere
+	# "Reuse Recorded Resolution"
+	# Remember how a conflict was resolved and re-apply it.
+	enabled = true
