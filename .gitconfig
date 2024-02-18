@@ -50,6 +50,8 @@
 	last-branch = "!git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1}"
 [commit]
 	gpgsign = true
+	# Show full diff in the commit text editor.
+	verbose = true
 [tag]
 	gpgsign = true
 [diff]
@@ -62,3 +64,5 @@
 	# "Reuse Recorded Resolution"
 	# Remember how a conflict was resolved and re-apply it.
 	enabled = true
+[merge]
+	conflictstyle = diff3  # TODO: maybe use zdiff3 on git >= 2.35
