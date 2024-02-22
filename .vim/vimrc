@@ -346,8 +346,13 @@ endif
 " Default to showing hidden files and folders
 let NERDTreeShowHidden=1
 
-" Do not show vim swapfiles or anything in __pycache__
-let NERDTreeIgnore=['\.swp$', '__pycache__']
+" Do not show certain files and folders
+let NERDTreeIgnore=[
+	\'\.git$[[dir]]',
+	\'\.swp$[[file]]',
+	\'__pycache__[[dir]]',
+	\'bazel-.*$[[dir]]',
+	\]
 
 " ALE
 " ===========================================================================
