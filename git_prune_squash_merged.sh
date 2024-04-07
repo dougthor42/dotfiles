@@ -16,6 +16,7 @@ DRY_RUN=0
 VERBOSE=0
 
 MAIN_BRANCH="master"
+ALT_MAIN_BRANCH="main"
 
 while [[ "$#" -gt 0 ]];
 do
@@ -32,6 +33,11 @@ if [[ $DRY_RUN -eq 1 ]]
 then
 	echo "DRY RUN - no branches will be deleted.";
 fi;
+
+if ! $(git show-ref --quiet refs/heads/${MAIN_BRANCH}); then
+	echo "Branch '${MAIN_BRANCH}' not found, trying '${ALT_MAIN_BRANCH}'."
+	MAIN_BRANCH=$ALT_MAIN_BRANCH
+fi
 
 # Prune local branches that we squashed and merged.
 # See https://stackoverflow.com/a/56026209/1354930
