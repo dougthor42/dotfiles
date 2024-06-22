@@ -23,6 +23,8 @@ do
 	case $1 in
 		-n|--dry-run) DRY_RUN=1; shift ;;
 		-v|--verbose) VERBOSE=1; shift ;;
+		-vv) VERBOSE=2; shift ;;
+		-vvv) VERBOSE=3; shift ;;
 		*) echo "Unknown parameter passed: $1"; exit 1 ;;
 	esac
 	shift
@@ -45,6 +47,10 @@ git checkout -q $MAIN_BRANCH &&
 git for-each-ref refs/heads/ "--format=%(refname:short)" |
 while read branch;
 do
+	if [[ $VERBOSE -eq 2 ]]
+	then
+		echo "Checking $branch ...";
+	fi;
 	# Get the merge-base. The merge-base is the "best common ancestor(s)
 	# between two commits". Eg: the commit on master that a branch was
 	# created from.
@@ -95,8 +101,11 @@ do
 		fi;
 	else
 		# If not, we only delete if --force is given. (TODO)
-		echo "$branch is a dependency of other branch(es). Not deleting without --force"
 		if [[ $VERBOSE -eq 1 ]]
+		then
+			echo "$branch is a dependency of other branch(es). Not deleting without --force"
+		fi;
+		if [[ $VERBOSE -eq 3 ]]
 		then
 			echo "$CONTAINS";
 		fi;
