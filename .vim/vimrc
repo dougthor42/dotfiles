@@ -374,6 +374,7 @@ let g:ale_fixers = {
 	\ 'go': ['gofmt'],
 	\ 'python': ['ruff_format'],
 	\ 'json': ['jq'],
+	\ 'sh': ['shfmt'],
 	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
