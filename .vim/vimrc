@@ -68,6 +68,10 @@ set path+=**		" Have the "Find" command recursively search through subdirectorie
 set lazyredraw		" Redraw only when we need to. Speeds up macros.
 set visualbell t_vb=	" Do not bing/beep or flash or send any bell codes.
 set colorcolumn=80,100	" Highlight column 80 and 100
+" Ignore these paths when expanding wildcards, completing file/dir names, and
+" other things (like CTRL-n completion).
+set wildignore+=*/bazel-*/*	" Bazel symlinks
+set wildignore+=*/.git/*	" Git dir
 
 " Disable the F1 key (normally shows help) because some keyboards have it too
 " close to ESC...
