@@ -13,6 +13,20 @@ curdir=$(pwd)
 # Change to the home dir. This isn't really needed.
 cd ~ || return
 
+# Install Tmux Plugin Manager
+echo "Installing tmux plugin manager TPM"
+readonly TMUX_TPM_DIR="${HOME}/.tmux/plugins/tpm"
+if [[ -d "${TMUX_TPM_DIR}/.git" ]]; then
+    echo "Updating TPM"
+    (
+        cd "${TMUX_TPM_DIR}"
+        git pull origin master
+    )
+else
+    echo "Installing TPM from scratch"
+    git clone https://github.com/tmux-plugins/tpm "${TMUX_TPM_DIR}"
+fi
+
 echo "Deleting old dotfiles."
 cp "$HOME/.inputrc" "$HOME/.inputrc.bak" || true
 rm "$HOME/.bashrc"
