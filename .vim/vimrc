@@ -379,6 +379,8 @@ let g:ale_fixers = {
 	\ 'python': ['ruff_format'],
 	\ 'json': ['jq'],
 	\ 'sh': ['shfmt'],
+	\ 'javascript': ['prettier'],
+	\ 'html': ['prettier'],
 	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
