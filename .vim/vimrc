@@ -360,6 +360,17 @@ let NERDTreeIgnore=[
 
 " ALE
 " ===========================================================================
+
+" ALE Custom Fixers
+" Stolen from  https://github.com/dense-analysis/ale/issues/3167#issuecomment-721280756
+" superhtml: https://github.com/kristoff-it/superhtml
+function! FormatSuperHtml(buffer) abort
+	return {
+	\	'command': 'superhtml'
+	\}
+endfunction
+execute ale#fix#registry#Add('superhtml', 'FormatSuperHtml', ['html'], 'superhtml for html')
+
 " TODO I want to play with this virtualtext highlighting more.
 " highlight link ALEVirtualTextError Error
 let g:ale_virtualtext_delay = 100  " ms
@@ -380,7 +391,7 @@ let g:ale_fixers = {
 	\ 'json': ['jq'],
 	\ 'sh': ['shfmt'],
 	\ 'javascript': ['prettier'],
-	\ 'html': ['prettier'],
+	\ 'html': ['superhtml'],
 	\}
 " Support ruff from a specific virtual env
 if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
