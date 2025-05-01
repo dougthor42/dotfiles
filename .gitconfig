@@ -48,6 +48,14 @@
 	# Print what the previous checked-out branch was.
 	# Useful for "previewing" `git checkout -`
 	last-branch = "!git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1}"
+
+	# Create a Gerrit changelist (from google internal doc go/gob/users/intro-codelab
+	cl-push = "!f() { git push origin HEAD:refs/for/${1:-main}; }; f"
+	# Start working on new CL. Accepts a branch name. If no branch name is given, uses
+	# a temp name with seconds since unix Epoch
+	cl-start = "!f() { NOW_EPOCH=$(date +%s); git checkout -b ${1:-temp_$NOW_EPOCH} origin/main; }; f"
+	# Update a CL. Run cl-push after.
+	cl-update = "!git commit --amend --no-edit"
 [commit]
 	gpgsign = true
 	# Show full diff in the commit text editor.
