@@ -193,6 +193,12 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Alias to show the Message of the Day
 alias motd='sudo run-parts /etc/update-motd.d/'
 
+# Google computers use `tmx2` to handle gnubby touches better. go/tmx2
+# tmx2 is a transparent wrapper around tmux.
+if [ -f /usr/bin/tmx2 ]; then
+  alias tmux=tmx2
+fi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
