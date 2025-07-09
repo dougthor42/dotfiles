@@ -232,15 +232,31 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
 fi
 
 # set a PS1 prompt with the time, user, host, location, and branch
+PROMPT_COMMAND=__prompt_command
+
+# From https://stackoverflow.com/a/16715681/1354930 and
+# https://github.com/demure/dotfiles/blob/master/subbash/prompt
+function __prompt_command() {
+	local EXIT=${PIPESTATUS[-1]} # This needs to be first
+	PS1=""
+
+	PREV_EXIT="${C_GREENBRIGHT}OK${C_RESET}"
+	if [[ "${EXIT}" != 0 ]]; then
+		PREV_EXIT="${C_REDBRIGHT}X ${EXIT}${C_RESET}"
+	fi
+
+	OLD_PWD="${PREV_EXIT}  ${C_PURPLEBRIGHT}Previous Dir: \${OLDPWD}${C_RESET}\n"
+	TIME="${C_REDBRIGHT}"'\t '
+	HOST="${C_GREENBRIGHT}${USER}"'@\h'
+	LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
+	# BRANCH doesn't appear to be WAI...
+	BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
+	EOI="${C_RESET}\n\$ "
+	PS1="${OLD_PWD}${TIME}${HOST}${LOCATION}${C_CYANBRIGHT}\$(__git_ps1)${DOCKER_MACHINE_PS}${EOI}"
+
+}
+
 git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
-OLD_PWD="${C_PURPLEBRIGHT}Previous Dir: \${OLDPWD}\n"
-TIME="${C_REDBRIGHT}"'\t '
-HOST="${C_GREENBRIGHT}${USER}"'@\h'
-LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
-# BRANCH doesn't appear to be WAI...
-BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
-EOI="${C_RESET}\n\$ "
-PS1="${OLD_PWD}${TIME}${HOST}${LOCATION}${C_CYANBRIGHT}\$(__git_ps1)${DOCKER_MACHINE_PS}${EOI}"
 
 # Export some environment variables
 export HOSTNAME
