@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+# shellcheck disable=SC1091
 ###########################################################
 #                                                         #
 # Doug's .bashrc file                                     #
@@ -14,8 +16,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # Always print and use physical directories.
@@ -96,12 +98,12 @@ shopt -s checkwinsize
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-*color|screen-*color|screen.xterm-*color) color_prompt=yes;;
+xterm-*color | screen-*color | screen.xterm-*color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -110,30 +112,29 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+	if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+		# We have color support; assume it's compliant with Ecma-48
+		# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+		# a case would tend to support setf rather than setaf.)
+		color_prompt=yes
+	else
+		color_prompt=
+	fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*|screen.xterm*|screen.rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm* | rxvt* | screen.xterm* | screen.rxvt*)
+	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+	;;
+*) ;;
 esac
 
 # Aliases
@@ -144,14 +145,14 @@ alias sudo='sudo '
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -A --group-directories-first --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	alias ls='ls -A --group-directories-first --color=auto'
+	#alias dir='dir --color=auto'
+	#alias vdir='vdir --color=auto'
 
-    alias grep='grep -n -C 3 --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+	alias grep='grep -n -C 3 --color=auto'
+	alias fgrep='fgrep --color=auto'
+	alias egrep='egrep --color=auto'
 fi
 
 # Even more aliases (or functions that act as aliases...)
@@ -159,11 +160,11 @@ alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 alias dir='ls -AlFh --group-directories-first'
-lsp(){ ls -AlFh --group-directories-first --color=always "$@" | less -R; }
+lsp() { ls -AlFh --group-directories-first --color=always "$@" | less -R; }
 alias df='df -h --total -T --exclude-type=squashfs'
 alias du='du -ch'
-alias cd..='cd ..'   # because I sometimes type too fast...
-alias cd!='cd $OLDPWD'      # allows fast switching to previous directory
+alias cd..='cd ..'     # because I sometimes type too fast...
+alias cd!='cd $OLDPWD' # allows fast switching to previous directory
 alias free='free -ht'
 alias mkdir='mkdir -pv'
 alias ip='ip -c'
@@ -175,16 +176,16 @@ alias python2=python2
 # Git aliases
 # Formatting info: 'git log' docs and https://stackoverflow.com/q/1441010/1354930
 GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ai %C(bold cyan)%an %C(bold green)%d %C(white)%s"'
-GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='$GIT_PRETTY_FORMAT
+GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='${GIT_PRETTY_FORMAT}
 GIT_LOG_CSV_FORMAT='format:"%h|%ai|%an|%d|%s"'
-alias gl='git log '$GIT_LOG_OPTS
-alias glt='git log `git describe --tags --abbrev=0`..HEAD '$GIT_LOG_OPTS
-alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '$GIT_LOG_OPTS
+alias gl='git log '${GIT_LOG_OPTS}
+alias glt='git log `git describe --tags --abbrev=0`..HEAD '${GIT_LOG_OPTS}
+alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '${GIT_LOG_OPTS}
 alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
 alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HEAD'
 # Watch the git log
-alias wgl='watch --color '"'"'git log --color=always '$GIT_LOG_OPTS"'"
-alias gl_csv='git log --oneline --decorate --source --pretty='$GIT_LOG_CSV_FORMAT
+alias wgl='watch --color '"'"'git log --color=always '${GIT_LOG_OPTS}"'"
+alias gl_csv='git log --oneline --decorate --source --pretty='${GIT_LOG_CSV_FORMAT}
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -196,7 +197,7 @@ alias motd='sudo run-parts /etc/update-motd.d/'
 # Google computers use `tmx2` to handle gnubby touches better. go/tmx2
 # tmx2 is a transparent wrapper around tmux.
 if [ -f /usr/bin/tmx2 ]; then
-  alias tmux=tmx2
+	alias tmux=tmx2
 fi
 
 # Alias definitions.
@@ -205,40 +206,41 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+	. ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
 # If docker-machine is installed, then also add the docker-machine shell prompt
 DOCKER_MACHINE_PS=""
-if [ -n docker-machine version 2> /dev/null ]; then
-    DOCKER_MACHINE_PS=$(__docker_machine_ps1)
+if [ -n docker-machine version ] 2>/dev/null; then
+	DOCKER_MACHINE_PS=$(__docker_machine_ps1)
 fi
 
 # Have WSL connect to the remote Docker daemon running in Windows
-if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null; then
-  export DOCKER_HOST=tcp://0.0.0.0:2375
+if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
+	export DOCKER_HOST=tcp://0.0.0.0:2375
 fi
 
 # set a PS1 prompt with the time, user, host, location, and branch
-git_branch() { git branch 2> /dev/null | grep '^*' | colrm 1 2; }
-OLD_PWD=$C_PURPLEBRIGHT"Previous Dir: \$OLDPWD\n"
-TIME=$C_REDBRIGHT'\t '
-HOST=$C_GREENBRIGHT$USER'@\h'
-LOCATION=$C_YELLOWBRIGHT' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
-BRANCH="$C_CYANBRIGHT$(__git_ps1)"
-EOI="$C_RESET\n\$ "
-PS1="$OLD_PWD$TIME$HOST$LOCATION$C_CYANBRIGHT\$(__git_ps1)$DOCKER_MACHINE_PS$EOI"
+git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
+OLD_PWD=${C_PURPLEBRIGHT}"Previous Dir: \$OLDPWD\n"
+TIME=${C_REDBRIGHT}'\t '
+HOST=${C_GREENBRIGHT}${USER}'@\h'
+LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
+# BRANCH doesn't appear to be WAI...
+BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
+EOI="${C_RESET}\n\$ "
+PS1="${OLD_PWD}${TIME}${HOST}${LOCATION}${BRANCH}${DOCKER_MACHINE_PS}${EOI}"
 
 # Export some environment variables
 export HOSTNAME
@@ -248,7 +250,7 @@ export HOSTNAME
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+	eval "$(pyenv init -)"
 fi
 
 # Add golang to PATH
@@ -259,7 +261,8 @@ export PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
 
 # PGP (GPG: GnuPG) - Make sure the GPG_TTY is set, otherwise
 # you get "Inappropriate ioctl for device" errors.
-export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # Rust/Cargo
 . "$HOME/.cargo/env"
