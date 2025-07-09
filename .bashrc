@@ -242,11 +242,10 @@ function __prompt_command() {
 
 	PREV_EXIT="${C_GREENBRIGHT}OK${C_RESET}"
 	if [[ "${EXIT}" != 0 ]]; then
-		PREV_EXIT="${C_REDBRIGHT}X${C_RESET}"
+		PREV_EXIT="${C_REDBRIGHT}X ${EXIT}${C_RESET}"
 	fi
 
-	OLD_PWD=$C_PURPLEBRIGHT"Previous: Exit Code: ${PREV_EXIT}; Duration: \$DUR; Dir \$OLDPWD\n"
-	OLD_PWD="${C_PURPLEBRIGHT}Previous Dir: \${OLDPWD}\n"
+	OLD_PWD="${PREV_EXIT}  ${C_PURPLEBRIGHT}Previous Dir: \${OLDPWD}${C_RESET}\n"
 	TIME="${C_REDBRIGHT}"'\t '
 	HOST="${C_GREENBRIGHT}${USER}"'@\h'
 	LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
