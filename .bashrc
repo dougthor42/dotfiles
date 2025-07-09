@@ -233,7 +233,7 @@ fi
 
 # set a PS1 prompt with the time, user, host, location, and branch
 git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
-OLD_PWD="${C_PURPLEBRIGHT}Previous Dir: ${OLDPWD}\n"
+OLD_PWD="${C_PURPLEBRIGHT}Previous Dir: \${OLDPWD}\n"
 TIME="${C_REDBRIGHT}"'\t '
 HOST="${C_GREENBRIGHT}${USER}"'@\h'
 LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
