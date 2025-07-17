@@ -52,6 +52,7 @@ midgard*)
     echo "5CAA2B3B1017CED7!"
     ;;
 *)
+    echo "Unknown host '${THIS_HOSTNAME}'". >&2
     echo ""
     ;;
 esac
