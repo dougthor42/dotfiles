@@ -38,7 +38,7 @@ odin*)
     # subkey. Odin has all subkeys.
     echo "1C22730EC26ED6FB!"
     ;;
-dthor1.roam.*)
+dthor1*)
     echo "811D308AA7C10FA2"
     ;;
 dthor2.c.*)
