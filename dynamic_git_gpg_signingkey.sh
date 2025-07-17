@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # Super naive script but hey it works!
+#
+# Exits with code 2 if the host is not found.
 
 function doc() {
     echo "Return the GPG signingkey for the current host or passed hostname."
@@ -37,22 +39,22 @@ odin*)
     echo "1C22730EC26ED6FB!"
     ;;
 dthor1.roam.*)
-    echo "811D308AA7C10FA2!"
+    echo "811D308AA7C10FA2"
     ;;
 dthor2.c.*)
-    echo "10A8CB5928819595!"
+    echo "10A8CB5928819595"
     ;;
 dthor-pyledev.c.*)
-    echo "5358825FD5B58AAB!"
+    echo "5358825FD5B58AAB"
     ;;
 yggdrasil*)
-    echo "65E2E3EA0BF59145!"
+    echo "65E2E3EA0BF59145"
     ;;
 midgard*)
-    echo "5CAA2B3B1017CED7!"
+    echo "5CAA2B3B1017CED7"
     ;;
 *)
-    echo "Unknown host '${THIS_HOSTNAME}'". >&2
-    echo ""
+    echo "Unknown host '${THIS_HOSTNAME}'." >&2
+    exit 2
     ;;
 esac
