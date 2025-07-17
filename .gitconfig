@@ -7,14 +7,6 @@
 [user]
 	name = Douglas Thor
 	email = doug.thor@gmail.com
-	# TODO: set this per computer.
-	signingkey = 811D308AA7C10FA2  # dthor1.roam.corp.google.com
-	# signingkey = 10A8CB5928819595  # dthor2.c.googles.com
-	# signingkey = 5358825FD5B58AAB  # dthor-pyledev.c.googlers.com
-	# signingkey = 1C22730EC26ED6FB!  # odin
-	  # Note the trailing "!". See https://stackoverflow.com/a/50986820/1354930
-	# signingkey = 65E2E3EA0BF59145  # yggdrasil
-	# signingkey = 5CAA2B3B1017CED7  # midgard
 [core]
 	eof=lf
 	autocrlf = input

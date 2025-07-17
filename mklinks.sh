@@ -51,6 +51,16 @@ ln -s "$HOME/dotfiles/.toprc" "$HOME/.toprc"
 ln -s "$HOME/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
 ln -s "$HOME/dotfiles/.gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
 
+echo "Updating gitconfig for dynamic GPG signing keys."
+SIGNING_KEY=$("${HOME}"/dotfiles/dynamic_git_gpg_signingkey.sh)
+STATUS=$?
+if [[ $STATUS -eq 0 ]]; then
+    git config --global user.signingkey "${SIGNING_KEY}"
+else
+    echo "Failed to get signingkey; unsetting user.signingkey" >&2
+    git config --global --unset user.signingkey
+fi
+
 echo "Applying $HOME/.bashrc"
 source "$HOME/.bashrc"
 
