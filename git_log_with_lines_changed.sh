@@ -6,60 +6,61 @@
 # my liking.
 
 function help() {
-	echo "Usage: $0 [PATH]"
-	echo "  -h, --help	Show this help text"
-	echo ""
-	echo "Return a CSV of the commit hashes and how many lines were added/removed."
-	echo ""
-	echo "Parameters:"
-	echo "  PATH: Filter by commits that touch this path. If not given, defaults"
-	echo "        to '.'"
-	echo ""
-	echo "Examples:"
-	echo "  $0"
-	echo "    Hash,FilesChanged,Insertions,Deletions"
-	echo "    45596f9948,1,0,115"
-	echo "    a1978492e1,3,11,9"
-	echo "    0118afef06,1,51,13"
-	echo "    ..."
-	echo ""
-	echo "  $0 README.md"
-	echo "    Hash,FilesChanged,Insertions,Deletions"
-	echo "    7673c83,1,14,5"
-	echo "    f177c69,1,1,0"
-	echo "    c3c2656,1,13,0"
-	exit 1
+    echo "Usage: $0 [PATH]"
+    echo "  -h, --help	Show this help text"
+    echo ""
+    echo "Return a CSV of the commit hashes and how many lines were added/removed."
+    echo ""
+    echo "Parameters:"
+    echo "  PATH: Filter by commits that touch this path. If not given, defaults"
+    echo "        to '.'"
+    echo ""
+    echo "Examples:"
+    echo "  $0"
+    echo "    Hash,FilesChanged,Insertions,Deletions"
+    echo "    45596f9948,1,0,115"
+    echo "    a1978492e1,3,11,9"
+    echo "    0118afef06,1,51,13"
+    echo "    ..."
+    echo ""
+    echo "  $0 README.md"
+    echo "    Hash,FilesChanged,Insertions,Deletions"
+    echo "    7673c83,1,14,5"
+    echo "    f177c69,1,1,0"
+    echo "    c3c2656,1,13,0"
+    exit 1
 }
 
 PATH_TO_GIT_LOG=$1
 
 # Parse args
-while [[ "$#" -gt 0 ]];
-do
-	case $1 in
-		-h|--help) help; shift ;;
-	esac
-	shift
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+    -h | --help)
+        help
+        shift
+        ;;
+    esac
+    shift
 done
 
 # If the user did not supply a path, use the cwd.
 # N.B.: If the user set -h/--help, techincally $PATH_TO_GIT_LOG will have that value, but
 # the help function exits 1 before we get down here so we don't care that PATH_TO_GIT_LOG
 # is set wrong.
-if [[ ! $PATH_TO_GIT_LOG ]]
-then
-	echo "No path given, running on cwd '.'"
-	PATH_TO_GIT_LOG="."
+if [[ ! $PATH_TO_GIT_LOG ]]; then
+    echo "No path given, running on cwd '.'"
+    PATH_TO_GIT_LOG="."
 fi
 
-git log  --oneline --pretty="@%h"  --stat -- $PATH_TO_GIT_LOG \
-	| /bin/grep -v \| \
-	| tr "\n" " " \
-	| tr "@" "\n" \
-	| sed -E 's/([a-f0-9]*) +([0-9]+) files? changed, ([0-9]+) insertions?\(\+\), ([0-9]+) deletions?\(-\)/\1,\2,\3,\4/g' \
-	| sed -E 's/([a-f0-9]*) +([0-9]+) files? changed, ([0-9]+) insertions?\(\+\)/\1,\2,\3,0/g' \
-	| sed -E 's/([a-f0-9]+) +([0-9]+) files? changed, ([0-9]+) deletions?\(-\)/\1,\2,0,\3/g' \
-	| sed -E 's/^$/Hash,FilesChanged,Insertions,Deletions/g'
+git log --oneline --pretty="@%h" --stat -- $PATH_TO_GIT_LOG |
+    /bin/grep -v \| |
+    tr "\n" " " |
+    tr "@" "\n" |
+    sed -E 's/([a-f0-9]*) +([0-9]+) files? changed, ([0-9]+) insertions?\(\+\), ([0-9]+) deletions?\(-\)/\1,\2,\3,\4/g' |
+    sed -E 's/([a-f0-9]*) +([0-9]+) files? changed, ([0-9]+) insertions?\(\+\)/\1,\2,\3,0/g' |
+    sed -E 's/([a-f0-9]+) +([0-9]+) files? changed, ([0-9]+) deletions?\(-\)/\1,\2,0,\3/g' |
+    sed -E 's/^$/Hash,FilesChanged,Insertions,Deletions/g'
 
 # Explanation:
 #
