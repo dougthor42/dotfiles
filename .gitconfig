@@ -7,7 +7,6 @@
 [user]
 	name = Douglas Thor
 	email = doug.thor@gmail.com
-	signingkey = 1C22730EC26ED6FB!
 [core]
 	eof=lf
 	autocrlf = input
