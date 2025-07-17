@@ -4,8 +4,7 @@
 # originated from.
 #
 
-function help()
-                {
+function help() {
     echo "Usage: $0 [<branch>...]"
     echo "  -h, --help   Show this help text"
     echo ""
@@ -25,10 +24,10 @@ BRANCHES=("$@")
 # Parse args
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        -h | --help)
-            help
-            shift
-            ;;
+    -h | --help)
+        help
+        shift
+        ;;
     esac
     shift
 done

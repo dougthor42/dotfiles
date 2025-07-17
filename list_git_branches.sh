@@ -5,20 +5,18 @@
 
 # Check to see that we have a valid argument.
 dir=$1
-if [[ ! $dir ]]
-then
-	echo "No directory given; using current working direcotry."
-	dir=$(pwd)
-elif [ -d "$dir" ]
-then
-	echo "Looking for git repositories in '$dir'."
+if [[ ! $dir ]]; then
+    echo "No directory given; using current working direcotry."
+    dir=$(pwd)
+elif [ -d "$dir" ]; then
+    echo "Looking for git repositories in '$dir'."
 else
-	echo "Directory '$dir' not found."
-	return 1
+    echo "Directory '$dir' not found."
+    return 1
 fi
 
 # Now iterate through the directory looking for subdirectories.
 for d in "$dir"/*/; do
-	echo "$d"
-	git -C "$d" branch --color=always -lav 2> /dev/null || echo "  Not a git repo"
+    echo "$d"
+    git -C "$d" branch --color=always -lav 2>/dev/null || echo "  Not a git repo"
 done
