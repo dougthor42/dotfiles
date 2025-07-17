@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 #
-# Note the trailing "!" in keys. See https://stackoverflow.com/a/50986820/1354930
-#
 # Super naive script but hey it works!
 
 function doc() {
@@ -33,6 +31,9 @@ done
 
 case ${THIS_HOSTNAME} in
 odin*)
+    # Note the trailing "!". See https://stackoverflow.com/a/50986820/1354930
+    # It's only needed for odin because all other hosts only have a single
+    # subkey. Odin has all subkeys.
     echo "1C22730EC26ED6FB!"
     ;;
 dthor1.roam.*)
