@@ -231,7 +231,15 @@ if grep -qE "(Microsoft|WSL)" /proc/version &>/dev/null; then
     export DOCKER_HOST=tcp://0.0.0.0:2375
 fi
 
-# set a PS1 prompt with the time, user, host, location, and branch
+# PROMPT_COMMAND runs before any given command is actually run.
+# Set a PS1 prompt with the current clock time, user, host, path, and other
+# information.
+# N.B.: I've previously tried to record the "previous command duration" in
+# $PS1, but was unsucessful. The issue is that PROMPT_COMMAND runs before
+# the command is run. This means that the _end_time, which is measured
+# inside __prompt_command, is actually the previous idle time plus the
+# command duration. From what I can tell, Bash doesn't have a "run $THIS
+# _after_ the command completes special variable.
 PROMPT_COMMAND=__prompt_command
 
 # From https://stackoverflow.com/a/16715681/1354930 and
