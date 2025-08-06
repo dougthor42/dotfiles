@@ -249,11 +249,10 @@ function __prompt_command() {
     TIME="${C_REDBRIGHT}"'\t '
     HOST="${C_GREENBRIGHT}${USER}"'@\h'
     LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
-    # BRANCH doesn't appear to be WAI...
-    BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
-    EOI="${C_RESET}\n\$ "
+    # BRANCH doesn't appear to be WAI, so instead it's injected directly into PS1
+    # BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
+    EOI="${C_RESET}\n${VIRTUAL_ENV_PROMPT:-}\$ "
     PS1="${OLD_PWD}${TIME}${HOST}${LOCATION}${C_CYANBRIGHT}\$(__git_ps1)${DOCKER_MACHINE_PS}${EOI}"
-
 }
 
 git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
