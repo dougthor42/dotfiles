@@ -248,7 +248,7 @@ function __prompt_command() {
     local EXIT=${PIPESTATUS[-1]} # This needs to be first
     PS1=""
 
-    PREV_EXIT="${C_GREENBRIGHT}OK${C_RESET}"
+    PREV_EXIT="${C_GREENBRIGHT}OK 0${C_RESET}"
     if [[ "${EXIT}" != 0 ]]; then
         PREV_EXIT="${C_REDBRIGHT}X ${EXIT}${C_RESET}"
     fi

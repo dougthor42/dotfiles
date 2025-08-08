@@ -65,4 +65,4 @@
 	# Remember how a conflict was resolved and re-apply it.
 	enabled = true
 [merge]
-	conflictstyle = diff3  # TODO: maybe use zdiff3 on git >= 2.35
+	# conflictstyle = diff3  # TODO: maybe use zdiff3 on git >= 2.35
