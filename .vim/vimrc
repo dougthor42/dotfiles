@@ -394,10 +394,10 @@ let g:ale_fixers = {
 	\ 'html': ['superhtml'],
 	\}
 " Support ruff from a specific virtual env
-if filereadable(expand('~/.virtualenvs/pyle/bin/ruff'))
-	let g:ale_python_ruff_executable = expand('~/.virtualenvs/pyle/bin/ruff')
+if filereadable(expand('~/.virtualenvs/pyle3/bin/ruff'))
+	let g:ale_python_ruff_executable = expand('~/.virtualenvs/pyle3/bin/ruff')
 	let g:ale_python_ruff_use_global = 1
-	let g:ale_python_ruff_format_executable = expand('~/.virtualenvs/pyle/bin/ruff')
+	let g:ale_python_ruff_format_executable = expand('~/.virtualenvs/pyle3/bin/ruff')
 	let g:ale_python_ruff_format_use_global = 1
 endif
 
