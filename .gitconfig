@@ -47,7 +47,7 @@
 	# a temp name with seconds since unix Epoch
 	cl-start = "!f() { NOW_EPOCH=$(date +%s); git checkout -b ${1:-temp_$NOW_EPOCH} origin/main; }; f"
 	# Update a CL. Run cl-push after.
-	cl-update = "!git commit --amend --no-edit"
+	cl-update = "!git commit --amend --no-edit --date=now"
 [commit]
 	gpgsign = true
 	# Show full diff in the commit text editor.

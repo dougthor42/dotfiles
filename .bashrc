@@ -187,6 +187,10 @@ alias gd2t='git diff `git tag --sort version:refname | tail -n 2 | head -n 1` HE
 alias wgl='watch --color '"'"'git log --color=always '${GIT_LOG_OPTS}"'"
 alias gl_csv='git log --oneline --decorate --source --pretty='${GIT_LOG_CSV_FORMAT}
 
+# Special alias for pyle3-xc
+# Show the pyle3 submodule's 'git log' without having to change dirs.
+alias p3gl='(cd pyle3 && gl && cd ..)'
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -259,6 +263,7 @@ function __prompt_command() {
     LOCATION=${C_YELLOWBRIGHT}' `pwd | sed "s#\(/[^/]\{,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g"`'
     # BRANCH doesn't appear to be WAI, so instead it's injected directly into PS1
     # BRANCH="${C_CYANBRIGHT}"$(__git_ps1)
+    VENV_PROMPT=${VIRTUAL_ENV_PROMPT:-}
     EOI="${C_RESET}\n${VIRTUAL_ENV_PROMPT:-}\$ "
     PS1="${OLD_PWD}${TIME}${HOST}${LOCATION}${C_CYANBRIGHT}\$(__git_ps1)${DOCKER_MACHINE_PS}${EOI}"
 }
