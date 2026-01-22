@@ -90,6 +90,9 @@ endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 map <leader>w :call <SID>StripTrailingWhitespace()<CR>
 
+" Turn on spell checking in commit messages
+autocmd FileType gitcommit setlocal spell
+
 " Indenting
 " ===========================================================================
 " Defaults
