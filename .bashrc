@@ -270,6 +270,12 @@ function __prompt_command() {
 
 git_branch() { git branch 2>/dev/null | grep '^*' | colrm 1 2; }
 
+# Tirith: prevent homograph attacks
+# https://github.com/sheeki03/tirith
+if command -v tirith 1>/dev/null 2>&1; then
+    eval "$(tirith init --shell bash)"
+fi
+
 # Export some environment variables
 export HOSTNAME
 
