@@ -279,6 +279,12 @@ fi
 # Export some environment variables
 export HOSTNAME
 
+# Tell Bazel to use 'query' for tab completion instead of a heuristic grep. See
+# https://github.com/bazelbuild/bazel/blob/c42ae75d08669d77a4bf8f00ee2181b949dd5f30/scripts/bazel-complete-header.bash#L27-L37
+# Note that this can slow down tab completion initially while the query cache
+# is built.
+export BAZEL_COMPLETION_USE_QUERY=true
+
 # pyenv stuff.
 # https://github.com/pyenv/pyenv
 export PYENV_ROOT="$HOME/.pyenv"
