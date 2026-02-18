@@ -56,6 +56,7 @@ fi
 
 # Prune local branches that we squashed and merged.
 # See https://stackoverflow.com/a/56026209/1354930
+# TODO: only checkout if not on the main branch
 git checkout -q $MAIN_BRANCH &&
     git for-each-ref refs/heads/ "--format=%(refname:short)" |
     while read branch; do
