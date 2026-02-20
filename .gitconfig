@@ -34,7 +34,7 @@
 	#   git prune-squash-merged --dry-run
 	prune-squash-merged = "!bash $HOME/dotfiles/git_prune_squash_merged.sh"
 	# Show the full history for a file.
-	history = "!git log -p -M --follow --stat --"
+	hist = "!git log -p -M --follow --stat --"
 	# Show branch origins
 	show-branch-origin = "!bash $HOME/dotfiles/git_show_branch_origin.sh"
 	# Print what the previous checked-out branch was.
