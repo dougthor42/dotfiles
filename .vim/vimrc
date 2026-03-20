@@ -90,8 +90,9 @@ endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 map <leader>w :call <SID>StripTrailingWhitespace()<CR>
 
-" Turn on spell checking in commit messages
+" Turn on spell checking in commit messages and markdown files
 autocmd FileType gitcommit setlocal spell
+autocmd BufNewFile,BufRead *.md,*.MD setlocal spell
 
 " Indenting
 " ===========================================================================
@@ -369,7 +370,7 @@ let NERDTreeIgnore=[
 " superhtml: https://github.com/kristoff-it/superhtml
 function! FormatSuperHtml(buffer) abort
 	return {
-	\	'command': 'superhtml'
+	\	'command': 'superhtml fmt --stdin'
 	\}
 endfunction
 execute ale#fix#registry#Add('superhtml', 'FormatSuperHtml', ['html'], 'superhtml for html')
@@ -424,7 +425,7 @@ let g:lightline = {
 	\ 'colorscheme': 'wombat',
 	\ 'active': {
 	\   'left': [ [ 'mode' ],
-	\	      [ 'fugitive', 'filename', 'modified' ] ]
+	\	      [ 'fugitive', 'relativepath', 'modified' ] ]
 	\ },
 	\ 'separator': { 'left': '|', 'right': '|' },
 	\ 'subseparator': { 'left': "|", 'right': "|" },
