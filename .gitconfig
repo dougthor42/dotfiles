@@ -49,6 +49,14 @@
 	# Update a CL. Run cl-push after.
 	cl-update = "!git commit --amend --no-edit --date=now"
 	cl-update-push = "!f() { git cl-update; git cl-push; }; f"
+
+	# From https://piechowski.io/post/git-commands-before-reading-code/
+	code-changes-1y = "!f() { git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20; }; f"
+	contributors = "!f() { git shortlog -sn --no-merges; }; f"
+	bug-clusters = "!f() { git log -i -E --grep='fix|bug|broken' --name-only --format='' | sort | uniq -c | sort -nr | head -20; }; f"
+	commits-by-month = "!f() { git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c; }; f"
+	firefighting = "!f() { git log --oneline --pretty='%h%x09%ai%x09%an%x09%d%x09%s' --since='1 year ago' | grep -iE 'revert|hotfix|emergency|rollback'; }; f"
+
 [commit]
 	gpgsign = true
 	# Show full diff in the commit text editor.
