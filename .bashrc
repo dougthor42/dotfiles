@@ -169,6 +169,23 @@ alias free='free -ht'
 alias mkdir='mkdir -pv'
 alias ip='ip -c'
 
+# Subresource Intetrity hashing
+# https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+function _shasum_sri() {
+    local bits=$1
+    local file=$2
+    echo "sha${bits}-$(shasum -b -a "${bits}" ${file} | awk '{ print $1 }' | xxd -r -p | base64)"
+}
+function sha256sum_sri() {
+    _shasum_sri 256 $1
+}
+function sha384sum_sri() {
+    _shasum_sri 384 $1
+}
+function sha512sum_sri() {
+    _shasum_sri 512 $1
+}
+
 # Use python3 by default
 alias python=python3
 alias python2=python2
