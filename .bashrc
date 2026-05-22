@@ -192,7 +192,8 @@ alias python2=python2
 
 # Git aliases
 # Formatting info: 'git log' docs and https://stackoverflow.com/q/1441010/1354930
-GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ai %C(bold cyan)%an %C(bold green)%d %C(white)%s"'
+# N.B.: Add '%C(dim white)%ai%Creset' to show the auth date
+GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ci %C(bold cyan)%an %C(bold green)%d %C(white)%s"'
 GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='${GIT_PRETTY_FORMAT}
 GIT_LOG_CSV_FORMAT='format:"%h|%ai|%an|%d|%s"'
 alias gl='git log '${GIT_LOG_OPTS}
