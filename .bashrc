@@ -304,17 +304,31 @@ export BAZEL_COMPLETION_USE_QUERY=true
 
 # pyenv stuff.
 # https://github.com/pyenv/pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+PYENV_ROOT="$HOME/.pyenv"
+if [[ -d "${PYENV_ROOT}" ]]; then
+    export PYENV_ROOT
+fi
+if ! grep --quiet "${PYENV_ROOT}/bin" <<<"$PATH"; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+fi
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
 # Add golang to PATH
-export PATH="$PATH:/usr/local/go/bin"
+if ! grep --quiet "/usr/local/go/bin" <<<"$PATH"; then
+    export PATH="$PATH:/usr/local/go/bin"
+fi
 
 # Add git/contrib/diff-highlight to PATH. See comment in .gitconfig[core]
-export PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
+if ! grep --quiet "/usr/share/doc/git/contrib/diff-highlight" <<<"$PATH"; then
+    export PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
+fi
+
+# Add local binaries (namely poetry) to path
+if ! grep --quiet "$HOME/.local/bin" <<<"$PATH"; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # PGP (GPG: GnuPG) - Make sure the GPG_TTY is set, otherwise
 # you get "Inappropriate ioctl for device" errors.
