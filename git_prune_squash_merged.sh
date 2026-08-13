@@ -15,8 +15,8 @@
 DRY_RUN=0
 VERBOSE=0
 
-MAIN_BRANCH="master"
-ALT_MAIN_BRANCH="main"
+MAIN_BRANCH="main"
+ALT_MAIN_BRANCH="master"
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -56,9 +56,13 @@ fi
 
 # Prune local branches that we squashed and merged.
 # See https://stackoverflow.com/a/56026209/1354930
-# TODO: only checkout if not on the main branch
-git checkout -q $MAIN_BRANCH &&
-    git for-each-ref refs/heads/ "--format=%(refname:short)" |
+CURRENT_BRANCH="$(git branch --show-current)"
+if [[ "${CURRENT_BRANCH}" != "${MAIN_BRANCH}" ]]; then
+    echo "Switching from '${CURRENT_BRANCH}' to '${MAIN_BRANCH}'"
+    git checkout -q $MAIN_BRANCH
+fi
+
+git for-each-ref refs/heads/ "--format=%(refname:short)" |
     while read branch; do
         if [[ $VERBOSE -eq 2 ]]; then
             echo "Checking $branch ..."
