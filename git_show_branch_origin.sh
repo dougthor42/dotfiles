@@ -48,7 +48,7 @@ GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h %C(bold red)%ai %C(bold cyan)%an %C
 for branch_name in "${BRANCHES[@]}"; do
     # BRANCH_ORIGIN_COMMIT=$(git cherry master "$branch_name" | head -n 1 | cut -d ' ' -f 2)
     # ORIGINATING_COMMIT=$(git rev-parse "$BRANCH_ORIGIN_COMMIT"^)
-    ORIGINATING_COMMIT=$(git merge-base master "$branch_name")
+    ORIGINATING_COMMIT=$(git merge-base main "$branch_name")
 
     # Skip if bad branch name
     if [[ $? -ne 0 ]]; then

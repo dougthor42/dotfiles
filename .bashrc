@@ -197,6 +197,7 @@ GIT_PRETTY_FORMAT='format:"%C(bold yellow)%h%x09%C(bold red)%ci %C(bold cyan)%an
 GIT_LOG_OPTS='--oneline --decorate --source --graph --pretty='${GIT_PRETTY_FORMAT}
 GIT_LOG_CSV_FORMAT='format:"%h|%ai|%an|%d|%s"'
 alias gl='git log '${GIT_LOG_OPTS}
+alias mygl="git log --author='$(git config user.name)' ${GIT_LOG_OPTS} --no-graph"
 alias glt='git log `git describe --tags --abbrev=0`..HEAD '${GIT_LOG_OPTS}
 alias gl2t='git log `git tag --sort version:refname | tail -n 2 | head -n 1`..HEAD '${GIT_LOG_OPTS}
 alias gdt='git diff `git tag --sort version:refname | tail -n 1` HEAD'
@@ -215,6 +216,11 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Alias to show the Message of the Day
 alias motd='sudo run-parts /etc/update-motd.d/'
+
+# Bazel Stuff
+alias bb='bazel build --bes_backend='
+alias bnb='bazel build --nobuild --bes_backend='
+alias bt='bazel test --bes_backend='
 
 # Google computers use `tmx2` to handle gnubby touches better. go/tmx2
 # tmx2 is a transparent wrapper around tmux.

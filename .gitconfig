@@ -57,6 +57,8 @@
 	commits-by-month = "!f() { git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c; }; f"
 	firefighting = "!f() { git log --oneline --pretty='%h%x09%ai%x09%an%x09%d%x09%s' --since='1 year ago' | grep -iE 'revert|hotfix|emergency|rollback'; }; f"
 
+	# Show active hooks
+	active-hooks = "!f() { find "$(git rev-parse --git-common-dir)/hooks" -maxdepth 1 -type f -executable ! -name '*.sample'; }; f"
 [commit]
 	gpgsign = true
 	# Show full diff in the commit text editor.
