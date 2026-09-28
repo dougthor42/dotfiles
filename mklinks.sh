@@ -17,7 +17,7 @@ cd ~ || return
 echo "Installing tmux plugin manager TPM"
 readonly TMUX_TPM_DIR="${HOME}/.tmux/plugins/tpm"
 if [[ -d "${TMUX_TPM_DIR}/.git" ]]; then
-    echo "Updating TPM"
+    echo "Updating tmux TPM"
     (
         cd "${TMUX_TPM_DIR}"
         git pull origin master
@@ -50,6 +50,10 @@ ln -s "$HOME/dotfiles/.vim" "$HOME/.vim"
 ln -s "$HOME/dotfiles/.toprc" "$HOME/.toprc"
 ln -s "$HOME/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
 ln -s "$HOME/dotfiles/.gnupg/gpg-agent.conf" "$HOME/.gnupg/gpg-agent.conf"
+
+GIT_CONFIG_DIR="${XDG_CONFIG_HOME:-${HOME}/.config}/git"
+mkdir -p "${GIT_CONFIG_DIR}"
+ln -s "${HOME}/dotfiles/git_global_exclude" "${GIT_CONFIG_DIR}/ignore"
 
 echo "Updating gitconfig for dynamic GPG signing keys."
 SIGNING_KEY=$("${HOME}"/dotfiles/dynamic_git_gpg_signingkey.sh)

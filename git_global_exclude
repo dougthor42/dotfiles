@@ -1,0 +1,10 @@
+# My global gitignore.
+# Configured by https://github.com/dougthor42/dotfiles
+#
+# Gets placed in the default core.excludesFile path which is
+# $XDG_CONFIG_HOME/git/ignore (or $HOME/.config/git/ignore if XDG_CONFIG_HOME
+# is empty/not set).
+# See https://git-scm.com/docs/gitignore
+
+# A junk/temp/WIP directory
+gitignored/
