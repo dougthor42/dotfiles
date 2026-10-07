@@ -50,6 +50,9 @@ C_RESET='\[\033[0m\]'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Disable XON/XOFF flow control (prevents CTRL-S from freezing the terminal)
+stty -ixon
+
 if [ "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
