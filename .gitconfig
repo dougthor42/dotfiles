@@ -59,6 +59,9 @@
 
 	# Show active hooks
 	active-hooks = "!f() { find "$(git rev-parse --git-common-dir)/hooks" -maxdepth 1 -type f -executable ! -name '*.sample'; }; f"
+
+	# Print out my git branch history
+	branch-history = "!$HOME/dotfiles/git_branch_history.sh"
 [commit]
 	gpgsign = true
 	# Show full diff in the commit text editor.
