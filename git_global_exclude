@@ -7,4 +7,4 @@
 # See https://git-scm.com/docs/gitignore
 
 # A junk/temp/WIP directory
-gitignored/
+untracked/
