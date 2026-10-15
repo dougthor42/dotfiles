@@ -41,14 +41,16 @@
 	# Useful for "previewing" `git checkout -`
 	last-branch = "!git rev-parse --symbolic-full-name --abbrev-ref=loose @{-1}"
 
-	# Create a Gerrit changelist (from google internal doc go/gob/users/intro-codelab
-	cl-push = "!f() { git push origin HEAD:refs/for/${1:-main}; }; f"
+	# Create a Gerrit changelist (from google internal doc go/gob/users/intro-codelab)
+	cl-push = "!f() { git push origin ${1:-HEAD}:refs/for/${2:-main}; }; f"
 	# Start working on new CL. Accepts a branch name. If no branch name is given, uses
 	# a temp name with seconds since unix Epoch
 	cl-start = "!f() { NOW_EPOCH=$(date +%s); git checkout -b dev-u/dthor/${1:-temp_$NOW_EPOCH} origin/main; }; f"
 	# Update a CL. Run cl-push after.
 	cl-update = "!git commit --amend --no-edit --date=now"
 	cl-update-push = "!f() { git cl-update; git cl-push; }; f"
+	# Push each commit on a branch as an individual (non-chained) Gerrit CL.
+	cl-push-individual = "!$HOME/dotfiles/git_gerrit_push_individual.sh"
 
 	# From https://piechowski.io/post/git-commands-before-reading-code/
 	code-changes-1y = "!f() { git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20; }; f"
