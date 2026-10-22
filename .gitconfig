@@ -53,6 +53,8 @@
 	cl-push-individual = "!$HOME/dotfiles/git_gerrit_push_individual.sh"
 	# Find the local branch containing a Gerrit Change-Id (and optionally switch to it).
 	cl-search = "!$HOME/dotfiles/git_gerrit_cl_search.sh"
+	# Delete local branches whose Gerrit CLs have been merged into main or origin/main.
+	cl-clean = "!$HOME/dotfiles/git_gerrit_cl_clean.sh"
 
 	# From https://piechowski.io/post/git-commands-before-reading-code/
 	code-changes-1y = "!f() { git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20; }; f"
