@@ -41,7 +41,10 @@ while [[ $# -gt 0 ]]; do
 done
 
 pager_cmd="cat"
-if [[ "${pager_mode}" == "always" ]] || { [[ "${pager_mode}" == "auto" ]] && [[ -t 1 ]]; }; then
+# In auto mode, only paginate unbounded output (--all) on a TTY; a limited
+# count (including the default of 10) is printed directly.
+if [[ "${pager_mode}" == "always" ]] ||
+    { [[ "${pager_mode}" == "auto" ]] && [[ ${#limit_args[@]} -eq 0 ]] && [[ -t 1 ]]; }; then
     pager_cmd="$(git var GIT_PAGER)"
 fi
 
