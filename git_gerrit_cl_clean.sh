@@ -12,6 +12,7 @@ set -Eeuo pipefail
 DRY_RUN=0
 VERBOSE=0
 FORCE=0
+SUBJECT_WIDTH=80
 
 echo_info() {
     if [[ ${VERBOSE} -ge 1 ]]; then
@@ -43,8 +44,34 @@ Options:
   -f, --force     Delete merged branches even if other unmerged local branches
                   are stacked on top of them
   -v, --verbose   Increase verbosity (-v, -vv, -vvv)
+  -w, --subject-width N
+                  Max characters of the commit subject (1st line of the commit
+                  message) printed under each deleted branch (default: 80,
+                  0 to disable)
   -h, --help      Show this help message
 EOF
+}
+
+# Print the first line of the tip commit message of the given branch, indented
+# and truncated to SUBJECT_WIDTH characters (with a trailing "..." if truncated).
+print_subject() {
+    local ref="${1}"
+    local subject
+    if [[ ${SUBJECT_WIDTH} -le 0 ]]; then
+        return
+    fi
+    subject="$(git log -n 1 --format='%s' "${ref}" 2>/dev/null || true)"
+    if [[ -z "${subject}" ]]; then
+        return
+    fi
+    if [[ ${#subject} -gt ${SUBJECT_WIDTH} ]]; then
+        if [[ ${SUBJECT_WIDTH} -gt 3 ]]; then
+            subject="${subject:0:$((SUBJECT_WIDTH - 3))}..."
+        else
+            subject="${subject:0:${SUBJECT_WIDTH}}"
+        fi
+    fi
+    echo "  ${subject}"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -55,6 +82,22 @@ while [[ $# -gt 0 ]]; do
         ;;
     -f | --force)
         FORCE=1
+        shift
+        ;;
+    -w | --subject-width)
+        if [[ $# -lt 2 || ! "${2}" =~ ^[0-9]+$ ]]; then
+            echo "Error: ${1} requires a non-negative integer argument" >&2
+            exit 1
+        fi
+        SUBJECT_WIDTH="${2}"
+        shift 2
+        ;;
+    --subject-width=*)
+        SUBJECT_WIDTH="${1#*=}"
+        if [[ ! "${SUBJECT_WIDTH}" =~ ^[0-9]+$ ]]; then
+            echo "Error: --subject-width requires a non-negative integer argument" >&2
+            exit 1
+        fi
         shift
         ;;
     -v | --verbose)
@@ -217,6 +260,7 @@ for branch in "${MERGED_BRANCHES[@]}"; do
 
     if [[ ${DRY_RUN} -eq 1 ]]; then
         echo "${branch} is merged into ${BASE_SUMMARY} and can be deleted"
+        print_subject "${branch}"
         continue
     fi
 
@@ -227,5 +271,8 @@ for branch in "${MERGED_BRANCHES[@]}"; do
         CURRENT_BRANCH="$(git branch --show-current)"
     fi
 
+    # Capture the subject before deleting, since the ref is gone afterwards.
+    branch_sha="$(git rev-parse --verify --quiet "refs/heads/${branch}")"
     git branch -D "${branch}"
+    print_subject "${branch_sha}"
 done
