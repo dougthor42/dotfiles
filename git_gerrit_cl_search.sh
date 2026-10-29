@@ -15,6 +15,10 @@ set -Eeuo pipefail
 SWITCH=0
 CHANGE_ID=""
 
+readonly C_REDBRIGHT=$'\033[1;31m'
+readonly C_WHITEBRIGHT=$'\033[1;37m'
+readonly C_RESET=$'\033[0m'
+
 usage() {
     cat <<EOF
 Usage: git cl-search [options] <Change-Id>
@@ -38,13 +42,13 @@ while [[ $# -gt 0 ]]; do
         exit 0
         ;;
     -*)
-        echo "Unknown option: ${1}" >&2
+        echo "${C_REDBRIGHT}Unknown option:${C_RESET} ${1}" >&2
         usage >&2
         exit 1
         ;;
     *)
         if [[ -n "${CHANGE_ID}" ]]; then
-            echo "Error: Multiple Change-Ids specified ('${CHANGE_ID}' and '${1}')." >&2
+            echo "${C_REDBRIGHT}Error:${C_RESET} Multiple Change-Ids specified ('${CHANGE_ID}' and '${1}')." >&2
             usage >&2
             exit 1
         fi
@@ -55,7 +59,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "${CHANGE_ID}" ]]; then
-    echo "Error: A Gerrit Change-Id is required." >&2
+    echo "${C_REDBRIGHT}Error:${C_RESET} A Gerrit Change-Id is required." >&2
     usage >&2
     exit 1
 fi
@@ -65,7 +69,7 @@ CHANGE_ID="${CHANGE_ID#Change-Id:}"
 CHANGE_ID="${CHANGE_ID#"${CHANGE_ID%%[![:space:]]*}"}"
 
 if [[ ! "${CHANGE_ID}" =~ ^I[0-9a-fA-F]+$ ]]; then
-    echo "Error: Invalid Gerrit Change-Id '${CHANGE_ID}' (expected 'I' followed by hex digits)." >&2
+    echo "${C_REDBRIGHT}Error:${C_RESET} Invalid Gerrit Change-Id '${CHANGE_ID}' (expected 'I' followed by hex digits)." >&2
     exit 1
 fi
 
@@ -87,7 +91,7 @@ if [[ ${#EXCLUDE_REFS[@]} -eq 0 ]]; then
 fi
 
 if [[ ${#EXCLUDE_REFS[@]} -eq 0 ]]; then
-    echo "Error: Could not find 'main' or 'master' branch (local or origin)." >&2
+    echo "${C_REDBRIGHT}Error:${C_RESET} Could not find 'main' or 'master' branch (local or origin)." >&2
     exit 1
 fi
 
@@ -127,17 +131,17 @@ else
 fi
 
 if [[ ${#BRANCHES[@]} -eq 0 ]]; then
-    echo "No local branch found containing Change-Id '${CHANGE_ID}'." >&2
+    echo "No local branch found containing Change-Id '${C_WHITEBRIGHT}${CHANGE_ID}${C_RESET}'." >&2
     exit 1
 fi
 
 if [[ ${SWITCH} -eq 1 ]]; then
     if [[ ${#BRANCHES[@]} -gt 1 ]]; then
-        echo "Error: Change-Id '${CHANGE_ID}' found in multiple local branches; cannot switch automatically:" >&2
-        printf '  %s\n' "${BRANCHES[@]}" >&2
+        echo "${C_REDBRIGHT}Error:${C_RESET} Change-Id '${CHANGE_ID}' found in multiple local branches; cannot switch automatically:" >&2
+        printf "  ${C_WHITEBRIGHT}%s${C_RESET}\n" "${BRANCHES[@]}" >&2
         exit 1
     fi
     git switch "${BRANCHES[0]}"
 else
-    printf '%s\n' "${BRANCHES[@]}"
+    printf "${C_WHITEBRIGHT}%s${C_RESET}\n" "${BRANCHES[@]}"
 fi
