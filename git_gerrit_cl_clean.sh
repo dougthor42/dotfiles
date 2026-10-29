@@ -14,6 +14,12 @@ VERBOSE=0
 FORCE=0
 SUBJECT_WIDTH=80
 
+readonly C_REDBRIGHT=$'\033[1;31m'
+readonly C_YELLOWBRIGHT=$'\033[1;33m'
+readonly C_BLUEBRIGHT=$'\033[1;34m'
+readonly C_WHITEBRIGHT=$'\033[1;37m'
+readonly C_RESET=$'\033[0m'
+
 echo_info() {
     if [[ ${VERBOSE} -ge 1 ]]; then
         echo "$@"
@@ -71,7 +77,7 @@ print_subject() {
             subject="${subject:0:${SUBJECT_WIDTH}}"
         fi
     fi
-    echo "  ${subject}"
+    echo "  ${C_BLUEBRIGHT}${subject}${C_RESET}"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -86,7 +92,7 @@ while [[ $# -gt 0 ]]; do
         ;;
     -w | --subject-width)
         if [[ $# -lt 2 || ! "${2}" =~ ^[0-9]+$ ]]; then
-            echo "Error: ${1} requires a non-negative integer argument" >&2
+            echo "${C_REDBRIGHT}Error:${C_RESET} ${1} requires a non-negative integer argument" >&2
             exit 1
         fi
         SUBJECT_WIDTH="${2}"
@@ -95,7 +101,7 @@ while [[ $# -gt 0 ]]; do
     --subject-width=*)
         SUBJECT_WIDTH="${1#*=}"
         if [[ ! "${SUBJECT_WIDTH}" =~ ^[0-9]+$ ]]; then
-            echo "Error: --subject-width requires a non-negative integer argument" >&2
+            echo "${C_REDBRIGHT}Error:${C_RESET} --subject-width requires a non-negative integer argument" >&2
             exit 1
         fi
         shift
@@ -117,7 +123,7 @@ while [[ $# -gt 0 ]]; do
         exit 0
         ;;
     *)
-        echo "Unknown option: ${1}" >&2
+        echo "${C_REDBRIGHT}Unknown option:${C_RESET} ${1}" >&2
         usage >&2
         exit 1
         ;;
@@ -146,7 +152,7 @@ for branch_name in "main" "master"; do
 done
 
 if [[ ${#BASE_REFS[@]} -eq 0 ]]; then
-    echo "Error: Could not find 'main' or 'master' branch (local or origin)." >&2
+    echo "${C_REDBRIGHT}Error:${C_RESET} Could not find 'main' or 'master' branch (local or origin)." >&2
     exit 1
 fi
 
@@ -154,7 +160,7 @@ BASE_SUMMARY="$(printf '%s, ' "${BASE_LABELS[@]}")"
 BASE_SUMMARY="${BASE_SUMMARY%, }"
 echo "Pruning local branches fully merged into ${BASE_SUMMARY}..."
 if [[ ${DRY_RUN} -eq 1 ]]; then
-    echo "DRY RUN - no branches will be deleted."
+    echo "${C_YELLOWBRIGHT}DRY RUN - no branches will be deleted.${C_RESET}"
 fi
 
 # Index all Change-Ids present in main / origin/main in a single git log pass.
@@ -190,7 +196,7 @@ for branch in "${ALL_BRANCHES[@]}"; do
 
     if [[ ${#UNMERGED_SHAS[@]} -eq 0 ]]; then
         if [[ "${branch}" == "${CURRENT_BRANCH}" ]]; then
-            echo_info "Skipping current branch '${branch}' (0 commits ahead of ${BASE_SUMMARY})"
+            echo_info "Skipping current branch '${C_WHITEBRIGHT}${branch}${C_RESET}' (0 commits ahead of ${BASE_SUMMARY})"
             KEPT_BRANCHES+=("${branch}")
             continue
         fi
@@ -248,31 +254,32 @@ for branch in "${MERGED_BRANCHES[@]}"; do
         done
 
         if [[ ${#DEPENDENT_BRANCHES[@]} -gt 0 && ${FORCE} -eq 0 ]]; then
-            echo_info "${branch} is a dependency of unmerged branch(es). Not deleting without --force"
+            echo_info "${C_WHITEBRIGHT}${branch}${C_RESET} is a dependency of unmerged branch(es). Not deleting without --force"
             for dep in "${DEPENDENT_BRANCHES[@]}"; do
-                echo_trace "  ${dep}"
+                echo_trace "  ${C_WHITEBRIGHT}${dep}${C_RESET}"
             done
             continue
         fi
     fi
 
-    echo_info "${branch}: ${MERGED_REASON["${branch}"]}"
+    echo_info "${C_WHITEBRIGHT}${branch}${C_RESET}: ${MERGED_REASON["${branch}"]}"
 
     if [[ ${DRY_RUN} -eq 1 ]]; then
-        echo "${branch} is merged into ${BASE_SUMMARY} and can be deleted"
+        echo "${C_WHITEBRIGHT}${branch}${C_RESET} is merged into ${BASE_SUMMARY} and can be deleted"
         print_subject "${branch}"
         continue
     fi
 
     if [[ "${branch}" == "${CURRENT_BRANCH}" ]]; then
         target_checkout="${MAIN_BRANCH:-${BASE_LABELS[0]}}"
-        echo "Switching from '${CURRENT_BRANCH}' to '${target_checkout}'"
+        echo "Switching from '${C_WHITEBRIGHT}${CURRENT_BRANCH}${C_RESET}' to '${C_WHITEBRIGHT}${target_checkout}${C_RESET}'"
         git checkout -q "${target_checkout}"
         CURRENT_BRANCH="$(git branch --show-current)"
     fi
 
     # Capture the subject before deleting, since the ref is gone afterwards.
     branch_sha="$(git rev-parse --verify --quiet "refs/heads/${branch}")"
-    git branch -D "${branch}"
+    git branch -D "${branch}" |
+        sed -E "s/^(Deleted branch )(.+)( \(was .*\)\.)$/\1${C_WHITEBRIGHT}\2${C_RESET}\3/"
     print_subject "${branch_sha}"
 done
