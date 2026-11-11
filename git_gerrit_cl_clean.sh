@@ -38,6 +38,10 @@ echo_trace() {
     fi
 }
 
+echo_warn() {
+    echo "${C_YELLOWBRIGHT}Warning:${C_RESET} $*" >&2
+}
+
 usage() {
     cat <<EOF
 Usage: git cl-clean [options]
@@ -176,6 +180,26 @@ done < <(
 )
 
 CURRENT_BRANCH="$(git branch --show-current)"
+CURRENT_WORKTREE="$(git rev-parse --show-toplevel)"
+
+# Map branch name -> worktree path for every branch checked out in a worktree
+# other than the current one. Git refuses to delete such branches, so they are
+# reported as skipped instead of failing.
+declare -A OTHER_WORKTREE_BRANCHES=()
+worktree_path=""
+while IFS= read -r line; do
+    case "${line}" in
+    "worktree "*)
+        worktree_path="${line#worktree }"
+        ;;
+    "branch refs/heads/"*)
+        if [[ "${worktree_path}" != "${CURRENT_WORKTREE}" ]]; then
+            worktree_branch="${line#branch refs/heads/}"
+            OTHER_WORKTREE_BRANCHES["${worktree_branch}"]="${worktree_path}"
+        fi
+        ;;
+    esac
+done < <(git worktree list --porcelain)
 
 declare -a ALL_BRANCHES=()
 mapfile -t ALL_BRANCHES < <(git for-each-ref --format='%(refname:short)' refs/heads/)
@@ -242,6 +266,8 @@ for branch in "${ALL_BRANCHES[@]}"; do
     fi
 done
 
+DELETE_FAILED=0
+
 for branch in "${MERGED_BRANCHES[@]}"; do
     # For non-ancestor branches (rebased by Gerrit), check if any unmerged
     # local branch is stacked on top of this branch's local commit SHA.
@@ -262,6 +288,15 @@ for branch in "${MERGED_BRANCHES[@]}"; do
         fi
     fi
 
+    # Branches checked out in another worktree cannot be deleted; report and
+    # move on rather than failing.
+    if [[ -n "${OTHER_WORKTREE_BRANCHES[${branch}]+isset}" ]]; then
+        echo "${C_YELLOWBRIGHT}Skipping${C_RESET}" \
+            "'${C_WHITEBRIGHT}${branch}${C_RESET}':" \
+            "checked out in worktree ${OTHER_WORKTREE_BRANCHES[${branch}]}"
+        continue
+    fi
+
     echo_info "${C_WHITEBRIGHT}${branch}${C_RESET}: ${MERGED_REASON["${branch}"]}"
 
     if [[ ${DRY_RUN} -eq 1 ]]; then
@@ -273,13 +308,31 @@ for branch in "${MERGED_BRANCHES[@]}"; do
     if [[ "${branch}" == "${CURRENT_BRANCH}" ]]; then
         target_checkout="${MAIN_BRANCH:-${BASE_LABELS[0]}}"
         echo "Switching from '${C_WHITEBRIGHT}${CURRENT_BRANCH}${C_RESET}' to '${C_WHITEBRIGHT}${target_checkout}${C_RESET}'"
-        git checkout -q "${target_checkout}"
+        if ! git checkout -q "${target_checkout}"; then
+            echo_warn "could not switch to '${target_checkout}';" \
+                "not deleting '${C_WHITEBRIGHT}${branch}${C_RESET}'"
+            DELETE_FAILED=1
+            continue
+        fi
         CURRENT_BRANCH="$(git branch --show-current)"
     fi
 
     # Capture the subject before deleting, since the ref is gone afterwards.
     branch_sha="$(git rev-parse --verify --quiet "refs/heads/${branch}")"
-    git branch -D "${branch}" |
+
+    # Capture the output rather than piping it so a failed delete is caught
+    # here instead of tripping pipefail and aborting the whole run.
+    if ! delete_output="$(git branch -D "${branch}" 2>&1)"; then
+        echo_warn "could not delete '${C_WHITEBRIGHT}${branch}${C_RESET}':" \
+            "${delete_output}"
+        DELETE_FAILED=1
+        continue
+    fi
+    echo "${delete_output}" |
         sed -E "s/^(Deleted branch )(.+)( \(was .*\)\.)$/\1${C_WHITEBRIGHT}\2${C_RESET}\3/"
     print_subject "${branch_sha}"
 done
+
+if [[ ${DELETE_FAILED} -eq 1 ]]; then
+    exit 1
+fi
