@@ -86,3 +86,5 @@
 	enabled = true
 [merge]
 	# conflictstyle = diff3  # TODO: maybe use zdiff3 on git >= 2.35
+[init]
+	defaultBranch = main
